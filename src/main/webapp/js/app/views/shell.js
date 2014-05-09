@@ -5,7 +5,7 @@ define(function (require) {
     var $                   = require('jquery'),
         _                   = require('underscore'),
         Backbone            = require('backbone'),
-        EmployeeListView    = require('app/views/EmployeeList'),
+        EmployeeListView    = require('app/views/employeeList'),
         models              = require('app/models/employee'),
         tpl                 = require('text!tpl/Shell.html'),
 

@@ -4,8 +4,8 @@ define(function (require) {
 
     var $           = require('jquery'),
         Backbone    = require('backbone'),
-        ShellView   = require('app/views/Shell'),
-        HomeView    = require('app/views/Home'),
+        ShellView   = require('app/views/shell'),
+        HomeView    = require('app/views/home'),
 
         $body = $('body'),
         shellView = new ShellView({el: $body}).render(),
@@ -37,7 +37,7 @@ define(function (require) {
         },
 
         contact: function () {
-            require(["app/views/Contact"], function (ContactView) {
+            require(["app/views/contact"], function (ContactView) {
                 var view = new ContactView({el: $content});
                 view.render();
                 shellView.selectMenuItem('contact-menu');
@@ -45,7 +45,7 @@ define(function (require) {
         },
 
         employeeDetails: function (id) {
-            require(["app/views/Employee", "app/models/employee"], function (EmployeeView, models) {
+            require(["app/views/employee", "app/models/employee"], function (EmployeeView, models) {
                 var employee = new models.Employee({id: id});
                 employee.fetch({
                     success: function (data) {

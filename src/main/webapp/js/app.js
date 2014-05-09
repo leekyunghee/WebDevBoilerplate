@@ -25,6 +25,7 @@ require.config({
 });
 
 require(['jquery', 'backbone', 'app/router'], function ($, Backbone, Router) {
+	console.log('start app');
     var router = new Router();
     Backbone.history.start();
 });
