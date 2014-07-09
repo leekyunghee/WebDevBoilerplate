@@ -1,64 +1,68 @@
-define(function (require) {
+define(function(require) {
 
-    "use strict";
+	"use strict";
 
-    var $           = require('jquery'),
-        Backbone    = require('backbone'),
-        ShellView   = require('app/views/shell'),
-        HomeView    = require('app/views/home'),
+	// require library
+	var $ = require('jquery'), Backbone = require('backbone');
 
-        $body = $('body'),
-        shellView = new ShellView({el: $body}).render(),
-        $content = $("#content", shellView.el),
-        homeView = new HomeView({el: $content});
+	var $body = $('body');
 
-    // Close the search dropdown on click anywhere in the UI
-    $body.click(function () {
-        $('.dropdown').removeClass("open");
-    });
+	// require common view
+	var ShellView = require('views/shell'), shellView = new ShellView({
+		el : $body
+	});
 
-    $("body").on("click", "#showMeBtn", function (event) {
-        event.preventDefault();
-        shellView.search();
-    });
+	// Close the search dropdown on click anywhere in the UI
+	$body.click(function() {
+		$('.dropdown').removeClass("open");
+	});
 
-    return Backbone.Router.extend({
+	$("body").on("click", "#showMeBtn", function(event) {
+		event.preventDefault();
+		shellView.search();
+	});
 
-        routes: {
-            "": "home",
-            "contact": "contact",
-            "employees/:id": "employeeDetails"
-        },
+	return Backbone.Router.extend({
 
-        home: function () {
-            homeView.delegateEvents(); // delegate events when the view is recycled
-            homeView.render();
-            shellView.selectMenuItem('home-menu');
-        },
+		routes : {
+			"" : "login",
+			"login" : "login",
+			"home" : "home",
+			"employee" : "employee"
+		},
+		login : function() {
+			var LoginView = require('views/login');
+			var loginView = new LoginView({
+				el : $body
+			}).render();
+		},
+		home : function() {
+			shellView.render();
+			var $content = $('#content', shellView.el);
+			var HomeView = require('views/home');
+			var homeView = new HomeView({
+				el : $content
+			}).render();
+		},
+		employee : function() {
+			shellView.render();
+			var $content = $('#content', shellView.el);
 
-        contact: function () {
-            require(["app/views/contact"], function (ContactView) {
-                var view = new ContactView({el: $content});
-                view.render();
-                shellView.selectMenuItem('contact-menu');
-            });
-        },
+			var models = require('models/employee');
+			var EmployeeListView = require('views/system/employeeList');
 
-        employeeDetails: function (id) {
-            require(["app/views/employee", "app/models/employee"], function (EmployeeView, models) {
-                var employee = new models.Employee({id: id});
-                employee.fetch({
-                    success: function (data) {
-                        // Note that we could also 'recycle' the same instance of EmployeeFullView
-                        // instead of creating new instances
-                        var view = new EmployeeView({model: data, el: $content});
-                        view.render();
-                    }
-                });
-                shellView.selectMenuItem();
-            });
-        }
+			var employee = new models.ReportsCollection();
+			employee.fetch({
+				success : function(data) {
+					var listView = new EmployeeListView({
+						collection : employee,
+						el : $content
+					});
+					listView.render();
+				}
+			});
+		}
 
-    });
+	});
 
 });

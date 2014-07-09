@@ -92,9 +92,10 @@ define(function (require) {
 
             sync: function (method, model, options) {
                 if (method === "read") {
-                    findByManager(this.parent.id).done(function (data) {
-                        options.success(data);
-                    });
+                	options.success(employees);
+//                    findByManager(this.parent.id).done(function (data) {
+//                        options.success(data);
+//                    });
                 }
             }
 
