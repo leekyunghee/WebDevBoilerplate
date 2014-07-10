@@ -21,7 +21,7 @@ define(function(require) {
 		},
 		login : function(event) {
 			var user = $('#userid').val(), password = $('#password').val();
-			location.href = '#employee';
+			location.href = '#employeeList';
 		}
 	});
 });
