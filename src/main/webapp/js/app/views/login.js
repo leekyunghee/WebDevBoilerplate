@@ -11,9 +11,17 @@ define(function(require) {
 	var tpl = require('text!tpl/login.html');
 	var template = _.template(tpl);
 	
+	// require i18n
+	var locale = require('i18n!nls/str');
+	
+	console.log(locale);
+	
 	return Backbone.View.extend({
 		render : function() {
 			this.$el.html(template());
+			$('#userid').prop('placeholder', locale.id);
+			$('#password').prop('placeholder', locale.password);
+			$('#loginBtn').html(locale.sign_in);
 			return this;
 		},
 		events : {

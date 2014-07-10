@@ -6,8 +6,12 @@ require.config({
 		app : '../app',
 		views : '../app/views',
 		models : '../app/models',
-		tpl : '../tpl'
+		tpl : '../tpl',
+		nls : '../nls'
 	},
+
+	// Set the config for the i18n
+	// locale : "en-us",
 
 	map : {
 		'*' : {

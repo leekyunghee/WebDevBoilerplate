@@ -29,7 +29,7 @@ define(function(require) {
 			"login" : "login",
 			"home" : "home",
 			"employeeList" : "employeeList",
-			"employees/:id": "employeeDetails"
+			"employees/:id" : "employeeDetails"
 		},
 		login : function() {
 			var LoginView = require('views/login');
@@ -65,15 +65,20 @@ define(function(require) {
 		employeeDetails : function(id) {
 			shellView.render();
 			var $content = $('#content', shellView.el);
-			
-			var models = require('models/employee');
+
+			var models = require('models/' + id);
 			var EmployeeView = require('views/system/employee');
-			
-			var employee = new models.Employee({id:id});
-			
+
+			var employee = new models.Employee({
+				id : id
+			});
+
 			employee.fetch({
 				success : function(data) {
-					var employeeView = new EmployeeView({model:data, el:$content}).render();
+					var employeeView = new EmployeeView({
+						model : data,
+						el : $content
+					}).render();
 				}
 			});
 		}
