@@ -51,7 +51,7 @@ define(function(require) {
 			var models = require('models/employee');
 			var EmployeeListView = require('views/system/employeeList');
 
-			var employee = new models.ReportsCollection();
+			var employee = new models.EmployeeCollection();
 			employee.fetch({
 				success : function(data) {
 					var listView = new EmployeeListView({
