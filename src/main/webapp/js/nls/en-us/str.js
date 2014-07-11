@@ -1,5 +1,5 @@
 define({
 	"id" : "User ID",
 	"password" : "Password",
-	"sign_in" : "로그인"
+	"sign_in" : "Sign In"
 });
