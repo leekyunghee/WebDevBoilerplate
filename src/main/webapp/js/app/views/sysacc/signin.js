@@ -7,15 +7,16 @@ define(function(require) {
 	var _ = require('underscore');
 	var Backbone = require('backbone');
 
+	// require model
+	var signInModel = require('models/sysacc/singIn');
+
 	// require template
 	var tpl = require('text!tpl/login.html');
 	var template = _.template(tpl);
-	
+
 	// require i18n
 	var locale = require('i18n!nls/str');
-	
-	console.log(locale);
-	
+
 	return Backbone.View.extend({
 		render : function() {
 			this.$el.html(template());
@@ -29,7 +30,24 @@ define(function(require) {
 		},
 		login : function(event) {
 			var user = $('#userid').val(), password = $('#password').val();
-			location.href = '#employeeList';
+			signInModel.set({
+				userId : user,
+				password : password
+			});
+			signInModel.obtainCertification({
+				success : function(data) {
+					if (data.get('successSignIn') == 'Y') {
+						location.href = '#employeeList';
+					} else {
+						alert('can not sign in');
+					}
+				},
+				error : function(model, response) {
+					console.log('fetch error');
+					console.log(model);
+					console.log(response);
+				}
+			});
 		}
 	});
 });
