@@ -32,7 +32,7 @@ define(function(require) {
 			"employees/:id" : "employeeDetails"
 		},
 		login : function() {
-			var LoginView = require('views/login');
+			var LoginView = require('views/sysacc/signin');
 			var loginView = new LoginView({
 				el : $body
 			}).render();
