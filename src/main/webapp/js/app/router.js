@@ -66,7 +66,8 @@ define(function(require) {
 			shellView.render();
 			var $content = $('#content', shellView.el);
 
-			var models = require('models/' + id);
+			console.log(id);
+			var models = require('models/employee');
 			var EmployeeView = require('views/system/employee');
 
 			var employee = new models.Employee({
