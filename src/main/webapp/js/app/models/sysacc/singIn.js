@@ -14,19 +14,17 @@ define(function(require) {
 		obtainCertification : function(options) {
 			this.fetch({
 				method : "POST",
-//				async : false,
 				contentType : 'application/json',
 				data : JSON.stringify(this.toJSON()),
 				success : options.success,
-				error : options.error
 //				success : function(data) {
 //					console.log(data);
 //				},
-//				error : function(model, response) {
-//					console.log('fetch error');
-//					console.log(model);
-//					console.log(response);
-//				}
+				error : function(model, response) {
+					console.log('fetch error');
+					console.log(model);
+					console.log(response);
+				}
 			});
 		}
 	});

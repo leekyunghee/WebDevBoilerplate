@@ -21,6 +21,7 @@ define(function(require) {
 		model : signInModel,
 		initialize : function() {
 //			this.listenTo(this.model, 'change', this.success)
+			// avoid 'change' event, because model.set method trigger 'change' event.
 		},
 		render : function() {
 			this.$el.html(template());
@@ -37,21 +38,9 @@ define(function(require) {
 				userId : $('#userid').val(),
 				password : $('#password').val()
 			});
-//			 signInModel.obtainCertification();
 
 			signInModel.obtainCertification({
-				success : function(data) {
-					if (data.get('successSignIn') == 'Y') {
-						location.href = '#employeeList';
-					} else {
-						alert('can not sign in');
-					}
-				},
-				error : function(model, response) {
-					console.log('fetch error');
-					console.log(model);
-					console.log(response);
-				}
+				success : this.success
 			});
 		},
 		success : function() {
