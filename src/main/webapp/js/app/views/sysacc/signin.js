@@ -18,6 +18,10 @@ define(function(require) {
 	var locale = require('i18n!nls/str');
 
 	return Backbone.View.extend({
+		model : signInModel,
+		initialize : function() {
+			this.listenTo(this.model, 'change', this.success)
+		},
 		render : function() {
 			this.$el.html(template());
 			$('#userid').prop('placeholder', locale.id);
@@ -29,25 +33,38 @@ define(function(require) {
 			"click #loginBtn" : "login"
 		},
 		login : function(event) {
-			var user = $('#userid').val(), password = $('#password').val();
 			signInModel.set({
-				userId : user,
-				password : password
+				userId : $('#userid').val(),
+				password : $('#password').val()
 			});
-			signInModel.obtainCertification({
-				success : function(data) {
-					if (data.get('successSignIn') == 'Y') {
-						location.href = '#employeeList';
-					} else {
-						alert('can not sign in');
-					}
-				},
-				error : function(model, response) {
-					console.log('fetch error');
-					console.log(model);
-					console.log(response);
-				}
-			});
+			 signInModel.obtainCertification();
+
+//			signInModel.obtainCertification({
+//				success : function(data) {
+//					if (data.get('successSignIn') == 'Y') {
+//						location.href = '#employeeList';
+//					} else {
+//						alert('can not sign in');
+//					}
+//				},
+//				error : function(model, response) {
+//					console.log('fetch error');
+//					console.log(model);
+//					console.log(response);
+//				}
+//			});
+		},
+		success : function() {
+			console.log('function success in singin.js');
+			console.log(signInModel.toJSON());
+			if (signInModel.get('successSignIn') == '') {
+				console.log('successSignIn field is empty.');
+				return;
+			} else if (signInModel.get('successSignIn') == 'Y'){
+				location.hash = '#employeeList';
+			} else {
+				alert('can not sign in');
+			}
 		}
 	});
 });
