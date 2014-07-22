@@ -17,8 +17,8 @@ define(function(require) {
 //				async : false,
 				contentType : 'application/json',
 				data : JSON.stringify(this.toJSON()),
-//				success : options.success,
-//				error : options.error
+				success : options.success,
+				error : options.error
 //				success : function(data) {
 //					console.log(data);
 //				},

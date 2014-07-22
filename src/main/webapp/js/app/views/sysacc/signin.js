@@ -20,7 +20,7 @@ define(function(require) {
 	return Backbone.View.extend({
 		model : signInModel,
 		initialize : function() {
-			this.listenTo(this.model, 'change', this.success)
+//			this.listenTo(this.model, 'change', this.success)
 		},
 		render : function() {
 			this.$el.html(template());
@@ -37,22 +37,22 @@ define(function(require) {
 				userId : $('#userid').val(),
 				password : $('#password').val()
 			});
-			 signInModel.obtainCertification();
+//			 signInModel.obtainCertification();
 
-//			signInModel.obtainCertification({
-//				success : function(data) {
-//					if (data.get('successSignIn') == 'Y') {
-//						location.href = '#employeeList';
-//					} else {
-//						alert('can not sign in');
-//					}
-//				},
-//				error : function(model, response) {
-//					console.log('fetch error');
-//					console.log(model);
-//					console.log(response);
-//				}
-//			});
+			signInModel.obtainCertification({
+				success : function(data) {
+					if (data.get('successSignIn') == 'Y') {
+						location.href = '#employeeList';
+					} else {
+						alert('can not sign in');
+					}
+				},
+				error : function(model, response) {
+					console.log('fetch error');
+					console.log(model);
+					console.log(response);
+				}
+			});
 		},
 		success : function() {
 			console.log('function success in singin.js');
