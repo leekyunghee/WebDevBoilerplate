@@ -8,7 +8,7 @@ define(function(require) {
 	var Backbone = require('backbone');
 
 	// require model
-	var signInModel = require('models/sysacc/singIn');
+	var loginModel = require('models/sysacc/login');
 
 	// require template
 	var tpl = require('text!tpl/login.html');
@@ -18,9 +18,9 @@ define(function(require) {
 	var locale = require('i18n!nls/str');
 
 	return Backbone.View.extend({
-		model : signInModel,
+		model : loginModel,
 		initialize : function() {
-//			this.listenTo(this.model, 'change', this.success)
+			// this.listenTo(this.model, 'change', this.success)
 			// avoid 'change' event, because model.set method trigger 'change' event.
 		},
 		render : function() {
@@ -45,11 +45,11 @@ define(function(require) {
 		},
 		success : function() {
 			console.log('function success in singin.js');
-			console.log(signInModel.toJSON());
-			if (signInModel.get('successSignIn') == '') {
+			console.log(loginModel.toJSON());
+			if (loginModel.get('successSignIn') == '') {
 				console.log('successSignIn field is empty.');
 				return;
-			} else if (signInModel.get('successSignIn') == 'Y'){
+			} else if (loginModel.get('successSignIn') == 'Y') {
 				location.hash = '#employeeList';
 			} else {
 				alert('can not sign in');

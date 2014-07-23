@@ -10,16 +10,13 @@ define(function(require) {
 			"password" : "",
 			"successSignIn" : ""
 		},
-		url : "signin",
+		url : "login",
 		obtainCertification : function(options) {
 			this.fetch({
 				method : "POST",
 				contentType : 'application/json',
 				data : JSON.stringify(this.toJSON()),
 				success : options.success,
-//				success : function(data) {
-//					console.log(data);
-//				},
 				error : function(model, response) {
 					console.log('fetch error');
 					console.log(model);
@@ -28,7 +25,7 @@ define(function(require) {
 			});
 		}
 	});
-	
+
 	return new SignInModel();
 
 });

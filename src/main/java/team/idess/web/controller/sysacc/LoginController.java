@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import team.idess.web.dto.web.sysacc.SignInFormDto;
+import team.idess.web.dto.web.sysacc.LoginFormDto;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class SignInController {
+public class LoginController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(SignInController.class);
+			.getLogger(LoginController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public SignInFormDto signin(Locale locale, @RequestBody SignInFormDto dto) {
+	public LoginFormDto login(Locale locale, @RequestBody LoginFormDto dto) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		logger.info("call signin in SignInController:" + dto);

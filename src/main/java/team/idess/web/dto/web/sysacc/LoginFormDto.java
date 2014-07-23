@@ -1,6 +1,6 @@
 package team.idess.web.dto.web.sysacc;
 
-public class SignInFormDto {
+public class LoginFormDto {
 	String userId;
 	String password;
 	String successSignIn;
