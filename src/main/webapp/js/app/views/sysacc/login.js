@@ -34,12 +34,12 @@ define(function(require) {
 			"click #loginBtn" : "login"
 		},
 		login : function(event) {
-			signInModel.set({
+			loginModel.set({
 				userId : $('#userid').val(),
 				password : $('#password').val()
 			});
 
-			signInModel.obtainCertification({
+			loginModel.obtainCertification({
 				success : this.success
 			});
 		},
