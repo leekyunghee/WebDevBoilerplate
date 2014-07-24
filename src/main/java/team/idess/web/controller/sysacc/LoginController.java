@@ -29,9 +29,9 @@ public class LoginController {
 	public LoginFormDto login(Locale locale, @RequestBody LoginFormDto dto) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		logger.info("call signin in SignInController:" + dto);
+		logger.info("call login in LoginController:" + dto);
 		
-		dto.setSuccessSignIn("Y");
+		dto.setSuccessLogin("Y");
 		
 		return dto;
 	}

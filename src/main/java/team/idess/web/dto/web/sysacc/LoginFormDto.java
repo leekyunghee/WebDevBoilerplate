@@ -3,7 +3,7 @@ package team.idess.web.dto.web.sysacc;
 public class LoginFormDto {
 	String userId;
 	String password;
-	String successSignIn;
+	String successLogin;
 
 	public String getUserId() {
 		return userId;
@@ -21,17 +21,18 @@ public class LoginFormDto {
 		this.password = password;
 	}
 
-	public String getSuccessSignIn() {
-		return successSignIn;
+	public String getSuccessLogin() {
+		return successLogin;
 	}
 
-	public void setSuccessSignIn(String successSignIn) {
-		this.successSignIn = successSignIn;
+	public void setSuccessLogin(String successLogin) {
+		this.successLogin = successLogin;
 	}
 
 	@Override
 	public String toString() {
-		return "SignInForm [userId=" + userId + ", password=" + password
-				+ ", successSignIn=" + successSignIn + "]";
+		return "LoginFormDto [userId=" + userId + ", password=" + password
+				+ ", successLogin=" + successLogin + "]";
 	}
+
 }

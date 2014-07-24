@@ -8,7 +8,7 @@ define(function(require) {
 		defaults : {
 			"userId" : "",
 			"password" : "",
-			"successSignIn" : ""
+			"successLogin" : ""
 		},
 		url : "login",
 		obtainCertification : function(options) {

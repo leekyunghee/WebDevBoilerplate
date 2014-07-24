@@ -46,10 +46,7 @@ define(function(require) {
 		success : function() {
 			console.log('function success in singin.js');
 			console.log(loginModel.toJSON());
-			if (loginModel.get('successSignIn') == '') {
-				console.log('successSignIn field is empty.');
-				return;
-			} else if (loginModel.get('successSignIn') == 'Y') {
+			if (loginModel.get('successLogin') == 'Y') {
 				location.hash = '#employeeList';
 			} else {
 				alert('can not sign in');
