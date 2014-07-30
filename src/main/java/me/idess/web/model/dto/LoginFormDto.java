@@ -1,4 +1,4 @@
-package team.idess.web.dto.web.sysacc;
+package me.idess.web.model.dto;
 
 public class LoginFormDto {
 	String userId;

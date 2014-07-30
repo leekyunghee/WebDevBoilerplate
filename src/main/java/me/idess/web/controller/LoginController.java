@@ -1,6 +1,8 @@
-package team.idess.web.controller.sysacc;
+package me.idess.web.controller;
 
 import java.util.Locale;
+
+import me.idess.web.model.dto.LoginFormDto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import team.idess.web.dto.web.sysacc.LoginFormDto;
 
 /**
  * Handles requests for the application home page.

@@ -1,4 +1,4 @@
-package team.idess.web.common.constant;
+package me.idess.web.common;
 
 /**
  * Constants

@@ -1,4 +1,4 @@
-package team.idess.web.bean.common;
+package me.idess.web.model;
 
 public abstract class CommonBean {
 	

@@ -1,17 +1,16 @@
-package team.idess.web.common.util;
+package me.idess.web.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Map;
 
+import me.idess.web.common.Constants;
+import me.idess.web.model.CommonBean;
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import team.idess.web.bean.common.CommonBean;
-import team.idess.web.common.constant.Constants;
 
 /**
  * 클라이언트로 받아온 "q" 데이터 포맷(String)을 파싱하는 유틸 주 역할은 Parameter 데이터를 해당 객체에 매핑한다.

@@ -1,4 +1,4 @@
-package team.idess.web.common.session;
+package me.idess.web.model;
 
 import java.util.HashMap;
 import java.util.Map;

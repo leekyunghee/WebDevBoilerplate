@@ -1,4 +1,4 @@
-package team.idess.web.common.util;
+package me.idess.web.util;
 
 import java.util.Random;
 

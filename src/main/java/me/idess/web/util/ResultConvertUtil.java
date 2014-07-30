@@ -1,15 +1,14 @@
-package team.idess.web.common.util;
+package me.idess.web.util;
 
 import java.util.List;
 import java.util.Map;
 
+import me.idess.web.common.Constants;
+import me.idess.web.model.CommonBean;
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import team.idess.web.bean.common.CommonBean;
-import team.idess.web.common.constant.Constants;
 
 /**
  * 클라이언트로 받아온 "q" 데이터 포맷(String)을 파싱하는 유틸 주 역할은 결과 데이터를 ResultData에 매핑한다.
