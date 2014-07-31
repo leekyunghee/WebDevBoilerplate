@@ -63,6 +63,8 @@ public class RestfulAuthFilter implements Filter {
 				if (uri.equals(loginUri)) {
 					logger.debug("Login process");
 					filterChain.doFilter(httpRequest, httpResponse);
+				} else {
+					logger.debug("Session is null or abnormal url access");
 				}
 			} else {
 				logger.debug("Authorized user");
