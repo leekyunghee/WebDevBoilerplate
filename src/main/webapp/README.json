@@ -2,7 +2,7 @@
     "name": "webdev",
     "description": "",
     "version": "0.0.1",
-    "homepage": "https://github.com/idess/WebDevBoilerplate",
+    "homepage": "https://idess.tistory.com/",
     "author": "idess <m.idess@gmail.com> (https://github.com/idess/)",
     "dependencies": {
         "html5": "3.7.0",
