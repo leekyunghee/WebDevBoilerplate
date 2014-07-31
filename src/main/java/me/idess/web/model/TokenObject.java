@@ -3,6 +3,8 @@ package me.idess.web.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.idess.web.util.NumberUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,6 +64,15 @@ public class TokenObject {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 토큰 생성
+	 * 
+	 * @return 생성된 토큰
+	 */
+	public static String makeToken(String username) {
+		return username + NumberUtil.getRandomValue();
 	}
 	
 }

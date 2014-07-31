@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import me.idess.web.model.TokenObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import org.springframework.stereotype.Service;
 public class RestfulAuthFilter implements Filter {
 	
 	private static final Logger	logger	= LoggerFactory.getLogger(RestfulAuthFilter.class);
+	
+	private final String loginUri = "/login";
 	
 	@Override
 	public void destroy() {
@@ -34,13 +38,9 @@ public class RestfulAuthFilter implements Filter {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			
-			HttpSession session = httpRequest.getSession();
-			
 			String uri = httpRequest.getRequestURI();
-			String path = uri.replaceFirst(httpRequest.getContextPath(), "");
 			
-			String loginId = null;
-			String token = null;
+			HttpSession session = httpRequest.getSession();
 			
 			// 스크립트 파일, 스타일 파일, 이미지를 호출할 경우 필터 조건에서 제외
 			if (uri.contains(".js") || uri.contains(".css") || uri.contains(".gif")
@@ -53,17 +53,30 @@ public class RestfulAuthFilter implements Filter {
 			if (uri.equals("/") || uri.equals("/index.html") || uri.equals("/sessionExpire.html")) {
 				session.removeAttribute("Token");
 				session.removeAttribute("Account");
-				session.removeAttribute("RoleNo");
-				session.removeAttribute("InstitutionNo");
 				logger.debug("############### 세션 제거 #################");
 			}
 			
-			AuthenticationRequestWrapper requestWrapper = new AuthenticationRequestWrapper(
-					httpRequest);
-			String requestBody = requestWrapper.getBody();
-			logger.debug(requestBody);
-			
-			filterChain.doFilter(requestWrapper, httpResponse);
+			logger.debug("session id: " + session.getId() + " session token: " + session.getAttribute("Token") + " session user: " + session.getAttribute("Username"));
+			Object sessionToken = session.getAttribute("Token");
+			if (sessionToken == null) {
+				logger.debug("Unauthorized user");
+				if (uri.equals(loginUri)) {
+					logger.debug("Login process");
+					filterChain.doFilter(httpRequest, httpResponse);
+				}
+			} else {
+				logger.debug("Authorized user");
+				// token 유효성 체크
+				String tokenObjectToken = TokenObject.getToken((String) session.getAttribute("Username"));
+				if (tokenObjectToken != null && tokenObjectToken.equals(sessionToken)) {
+					logger.debug("Valid Token");
+					filterChain.doFilter(httpRequest, httpResponse);
+				} else {
+					logger.debug("Invalid Token");
+					session.removeAttribute("Token");
+					session.removeAttribute("Username");
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

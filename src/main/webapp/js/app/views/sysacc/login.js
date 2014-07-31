@@ -35,7 +35,7 @@ define(function(require) {
 		},
 		login : function(event) {
 			loginModel.set({
-				userId : $('#userid').val(),
+				username : $('#userid').val(),
 				password : $('#password').val()
 			});
 

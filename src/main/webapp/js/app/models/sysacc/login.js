@@ -6,7 +6,7 @@ define(function(require) {
 
 	var SignInModel = Backbone.Model.extend({
 		defaults : {
-			"userId" : "",
+			"username" : "",
 			"password" : "",
 			"successLogin" : ""
 		},
