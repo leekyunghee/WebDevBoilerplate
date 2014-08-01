@@ -37,25 +37,24 @@ public class RestfulAuthFilter implements Filter {
 		try {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			
+			HttpSession session = httpRequest.getSession();
 			String uri = httpRequest.getRequestURI();
 			
-			HttpSession session = httpRequest.getSession();
-			
-			// 스크립트 파일, 스타일 파일, 이미지를 호출할 경우 필터 조건에서 제외
+			// Script files, style files, the files are removed from the filter.
 			if (uri.contains(".js") || uri.contains(".css") || uri.contains(".gif")
 					|| uri.contains(".png") || uri.contains(".jpg")) {
 				filterChain.doFilter(httpRequest, httpResponse);
 				return;
 			}
 			
-			// 로그인 페이지 및 세션 만료 정보 페이지로 갈경우 세션 제거
+			// Remove a session when you go to the login page and the session expired page.
 			if (uri.equals("/") || uri.equals("/index.html") || uri.equals("/sessionExpire.html")) {
-				session.removeAttribute("Token");
-				session.removeAttribute("Account");
 				logger.debug("############### 세션 제거 #################");
+				session.removeAttribute("Token");
+				session.removeAttribute("Username");
 			}
 			
+			// login validation
 			logger.debug("session id: " + session.getId() + " session token: " + session.getAttribute("Token") + " session user: " + session.getAttribute("Username"));
 			Object sessionToken = session.getAttribute("Token");
 			if (sessionToken == null) {
@@ -68,13 +67,13 @@ public class RestfulAuthFilter implements Filter {
 				}
 			} else {
 				logger.debug("Authorized user");
-				// token 유효성 체크
+				// token validation  
 				String tokenObjectToken = TokenObject.getToken((String) session.getAttribute("Username"));
 				if (tokenObjectToken != null && tokenObjectToken.equals(sessionToken)) {
 					logger.debug("Valid Token");
 					filterChain.doFilter(httpRequest, httpResponse);
 				} else {
-					logger.debug("Invalid Token");
+					logger.debug("Invalid Token or duplicate login");
 					session.removeAttribute("Token");
 					session.removeAttribute("Username");
 				}
