@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import me.idess.web.common.Constants;
-import me.idess.web.model.TokenObject;
 import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
