@@ -4,10 +4,9 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 
-import me.idess.web.filter.SessionObject;
-import me.idess.web.filter.TokenObject;
+import me.idess.web.model.SessionObject;
+import me.idess.web.model.TokenObject;
 import me.idess.web.model.dto.LoginFormDto;
-import me.idess.web.model.validation.LoginFormDtoValidator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping("/api")
 public class LoginController {
 	
 	private static final Logger	logger	= LoggerFactory.getLogger(LoginController.class);
@@ -35,9 +33,6 @@ public class LoginController {
 		
 		logger.debug("Welcome {}! The client locale is {}.", session.getAttribute("username"),
 				locale);
-		
-		LoginFormDtoValidator validator = new LoginFormDtoValidator();
-//		validator.validate(dto, new Errors());
 		
 		dto.setSuccessLogin("Y");
 		dto.setToken(TokenObject.makeToken(dto.getUsername()));

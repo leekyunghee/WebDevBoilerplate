@@ -1,4 +1,4 @@
-package me.idess.web.filter;
+package me.idess.web.model;
 
 import java.util.HashMap;
 import java.util.Map;
