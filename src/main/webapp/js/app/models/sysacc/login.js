@@ -10,7 +10,7 @@ define(function(require) {
 			"password" : "",
 			"successLogin" : ""
 		},
-		url : "login",
+		url : "api/login",
 		obtainCertification : function(options) {
 			this.fetch({
 				method : "POST",
