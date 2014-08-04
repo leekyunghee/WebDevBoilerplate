@@ -19,9 +19,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service("restfulAuthFilter")
-public class RestfulAuthFilter implements Filter {
+public class WebAuthFilter implements Filter {
 	
-	private static final Logger	logger	= LoggerFactory.getLogger(RestfulAuthFilter.class);
+	private static final Logger	logger	= LoggerFactory.getLogger(WebAuthFilter.class);
 	
 	private final String loginUri = "/login";
 	

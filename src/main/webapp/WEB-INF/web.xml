@@ -31,29 +31,15 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- 세션 타임아웃 설정 -->
+	<!-- session timeout -->
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
 
 	<!-- filter -->
-	<!-- <filter>
-		<filter-name>sessionFilter</filter-name>
-		<filter-class>me.idess.web.filter.SessionFilter</filter-class>
-		<async-supported>true</async-supported>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>sessionFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
 	<filter>
 		<filter-name>restfulAuthFilter</filter-name>
-		<filter-class>me.idess.web.filter.RestfulAuthFilter</filter-class>
+		<filter-class>me.idess.web.filter.WebAuthFilter</filter-class>
 		<async-supported>true</async-supported>
 		<init-param>
 			<param-name>encoding</param-name>
