@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import me.idess.web.model.TokenObject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -21,9 +19,9 @@ import org.springframework.stereotype.Service;
 @Service("restfulAuthFilter")
 public class WebAuthFilter implements Filter {
 	
-	private static final Logger	logger	= LoggerFactory.getLogger(WebAuthFilter.class);
+	private static final Logger	logger		= LoggerFactory.getLogger(WebAuthFilter.class);
 	
-	private final String loginUri = "/login";
+	private final String		loginUri	= "/api/login";
 	
 	@Override
 	public void destroy() {
@@ -42,7 +40,7 @@ public class WebAuthFilter implements Filter {
 			
 			// Script files, style files, the files are removed from the filter.
 			if (uri.contains(".js") || uri.contains(".css") || uri.contains(".gif")
-					|| uri.contains(".png") || uri.contains(".jpg")) {
+					|| uri.contains(".png") || uri.contains(".jpg") || uri.contains(".html")) {
 				filterChain.doFilter(httpRequest, httpResponse);
 				return;
 			}
@@ -55,7 +53,9 @@ public class WebAuthFilter implements Filter {
 			}
 			
 			// login validation
-			logger.debug("session id: " + session.getId() + " session token: " + session.getAttribute("Token") + " session user: " + session.getAttribute("Username"));
+			logger.debug(uri + " session id: " + session.getId() + " session token: "
+					+ session.getAttribute("Token") + " session user: "
+					+ session.getAttribute("Username"));
 			Object sessionToken = session.getAttribute("Token");
 			if (sessionToken == null) {
 				logger.debug("Unauthorized user");
@@ -67,15 +67,22 @@ public class WebAuthFilter implements Filter {
 				}
 			} else {
 				logger.debug("Authorized user");
-				// token validation  
-				String tokenObjectToken = TokenObject.getToken((String) session.getAttribute("Username"));
+				// token validation
+				String tokenObjectToken = TokenObject.getToken((String) session
+						.getAttribute("Username"));
 				if (tokenObjectToken != null && tokenObjectToken.equals(sessionToken)) {
 					logger.debug("Valid Token");
 					filterChain.doFilter(httpRequest, httpResponse);
 				} else {
 					logger.debug("Invalid Token or duplicate login");
+					
+					// Deletes the previously recorded sign.
 					session.removeAttribute("Token");
 					session.removeAttribute("Username");
+					
+					if (uri.equals(loginUri)) {
+						filterChain.doFilter(httpRequest, httpResponse);
+					}
 				}
 			}
 		} catch (Exception e) {
