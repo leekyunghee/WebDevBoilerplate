@@ -10,11 +10,6 @@
 		</layout>
 	</appender>
 
-	<!-- Application Loggers -->
-	<logger name="com.idess.webdev">
-		<level value="info" />
-	</logger>
-
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
@@ -32,6 +27,7 @@
 		<level value="info" />
 	</logger>
 	
+	<!-- Application Loggers -->
 	<logger name="me.idess.web">
 		<level value="debug" />
 	</logger>
