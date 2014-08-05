@@ -1,6 +1,8 @@
 package me.idess.web.model.dto;
 
-public class LoginFormDto {
+import me.idess.web.model.CommonBean;
+
+public class LoginFormDto extends CommonBean {
 	String	username;
 	String	password;
 	String	successLogin;
@@ -41,7 +43,8 @@ public class LoginFormDto {
 	@Override
 	public String toString() {
 		return "LoginFormDto [username=" + username + ", password=" + password + ", successLogin="
-				+ successLogin + ", token=" + token + "]";
+				+ successLogin + ", token=" + token + ", errorCode=" + super.getErrorCode()
+				+ ", errorMessage=" + super.getErrorMessage() + "]";
 	}
 	
 }

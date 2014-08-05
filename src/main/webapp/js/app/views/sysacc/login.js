@@ -49,7 +49,7 @@ define(function(require) {
 			if (loginModel.get('successLogin') == 'Y') {
 				location.hash = '#employeeList';
 			} else {
-				alert('can not sign in');
+				alert(loginModel.get('errorMessage'));
 			}
 		}
 	});

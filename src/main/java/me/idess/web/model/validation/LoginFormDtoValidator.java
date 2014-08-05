@@ -1,20 +1,26 @@
 package me.idess.web.model.validation;
 
+import me.idess.web.model.dto.LoginFormDto;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+@Controller
 public class LoginFormDtoValidator implements Validator {
 	
 	@Override
-	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean supports(Class<?> clazz) {
+		return LoginFormDto.class.isAssignableFrom(clazz);
 	}
 	
 	@Override
-	public void validate(Object arg0, Errors arg1) {
-		// TODO Auto-generated method stub
+	public void validate(Object target, Errors errors) {
+		LoginFormDto dto = (LoginFormDto) target;
 		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "field.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "field.required.password");
 	}
 	
 }
