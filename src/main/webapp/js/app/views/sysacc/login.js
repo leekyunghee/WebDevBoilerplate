@@ -49,7 +49,10 @@ define(function(require) {
 			if (loginModel.get('successLogin') == 'Y') {
 				location.hash = '#employeeList';
 			} else {
-				alert(loginModel.get('errorMessage'));
+//				$('.alert').alert();
+				$('.alert').css('style', 'display:block;').toggleClass('alert-' + loginModel.get('returnType').toLowerCase() , loginModel.get('returnType'));
+				$('#returnType').text(loginModel.get('returnType') + "!");
+				$('#message').text(loginModel.get('errorMessage'));
 			}
 		}
 	});

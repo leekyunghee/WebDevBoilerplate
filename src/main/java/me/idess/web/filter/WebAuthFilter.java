@@ -38,7 +38,7 @@ public class WebAuthFilter implements Filter {
 			HttpSession session = httpRequest.getSession();
 			String uri = httpRequest.getRequestURI();
 			
-			// Script files, style files, the files are removed from the filter.
+			// Script files, style files, image files is not  filter.
 			if (uri.contains(".js") || uri.contains(".css") || uri.contains(".gif")
 					|| uri.contains(".png") || uri.contains(".jpg") || uri.contains(".html")) {
 				filterChain.doFilter(httpRequest, httpResponse);

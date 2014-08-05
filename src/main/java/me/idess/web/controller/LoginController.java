@@ -1,7 +1,5 @@
 package me.idess.web.controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpSession;
 
 import me.idess.web.filter.SessionObject;
@@ -14,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,11 +41,11 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public LoginFormDto login(@RequestBody LoginFormDto dto, BindingResult result, Locale locale,
-			HttpSession session) throws Exception {
+	public LoginFormDto login(@RequestBody LoginFormDto dto, BindingResult result,
+			HttpSession session) {
 		
 		logger.debug("Welcome {}! The client locale is {}.", session.getAttribute("username"),
-				locale);
+				LocaleContextHolder.getLocale());
 		
 		loginFormDtoValidator.validate(dto, result);
 		
@@ -55,11 +54,12 @@ public class LoginController {
 		if (result.hasErrors()) {
 			dto.setSuccessLogin("N");
 			String code = result.getAllErrors().get(0).getCode();
-			dto.setReturnType(CommonBean.ReturnType.warning);
+			dto.setReturnType(CommonBean.ReturnType.Warning);
 			dto.setErrorCode(code);
-			dto.setErrorMessage(messageSource.getMessage(code, null, locale));
+			dto.setErrorMessage(messageSource.getMessage(code, null,
+					LocaleContextHolder.getLocale()));
 		} else {
-			dto.setReturnType(CommonBean.ReturnType.success);
+			dto.setReturnType(CommonBean.ReturnType.Success);
 			dto.setSuccessLogin("Y");
 			dto.setToken(TokenObject.makeToken(dto.getUsername()));
 			

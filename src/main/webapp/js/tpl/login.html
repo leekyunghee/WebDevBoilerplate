@@ -1,10 +1,20 @@
 <div class="container">
 
+	<div class="alert" role="alert alert-dismissable" aria-hidden="true">
+		<button type="button" class="close" data-dismiss="alert">
+			<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+		</button>
+		<div><strong id="returnType"></strong> <span id="message"></span></div>
+	</div>
+
 	<div class="row-fluid" id="content" style="margin-top: 68px;">
 		<form class="form-signin" role="form">
-			<input type="text" id="userid" class="form-control" placeholder="User ID" required autofocus>
-			<input type="password" id="password" class="form-control" placeholder="Password" required>
-			<button class="btn btn-lg btn-primary btn-block" id="loginBtn" type="button">Sign in</button>
+			<input type="text" id="userid" class="form-control"
+				placeholder="User ID" required autofocus> <input
+				type="password" id="password" class="form-control"
+				placeholder="Password" required>
+			<button class="btn btn-lg btn-primary btn-block" id="loginBtn"
+				type="button">Sign in</button>
 		</form>
 	</div>
 	<hr>
