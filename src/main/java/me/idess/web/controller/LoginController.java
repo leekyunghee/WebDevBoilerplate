@@ -44,7 +44,7 @@ public class LoginController {
 	public LoginFormDto login(@RequestBody LoginFormDto dto, BindingResult result,
 			HttpSession session) {
 		
-		logger.debug("Welcome {}! The client locale is {}.", session.getAttribute("username"),
+		logger.debug("Welcome {}! The client locale is {}.", session.getAttribute("Username"),
 				LocaleContextHolder.getLocale());
 		
 		loginFormDtoValidator.validate(dto, result);
