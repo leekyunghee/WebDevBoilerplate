@@ -12,6 +12,7 @@ define(function(require) {
 
 	// require common view
 	var AlertView = require('views/common/alert');
+	var ModalView = require('views/common/modal');
 
 	// require template
 	var tpl = require('text!tpl/login.html');
@@ -82,11 +83,14 @@ define(function(require) {
 			if (loginModel.get('successLogin') == 'Y') {
 				location.hash = '#employeeList';
 			} else {
-				console.log('alert');
 				AlertView.msg($('#alert'), {
 					alert : loginModel.get('returnType'),
 					message : loginModel.get('errorMessage')
 				});
+				var modal = new ModalView({
+					title : loginModel.get('returnType'),
+					body : loginModel.get('errorMessage')
+				}).render();
 			}
 		}
 	});
