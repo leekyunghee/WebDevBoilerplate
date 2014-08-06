@@ -2,12 +2,12 @@ package me.idess.web.model.validation;
 
 import me.idess.web.model.dto.LoginFormDto;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-@Controller
+@Component
 public class LoginFormDtoValidator implements Validator {
 	
 	@Override
