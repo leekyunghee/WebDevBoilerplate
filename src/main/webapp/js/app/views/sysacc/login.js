@@ -10,6 +10,9 @@ define(function(require) {
 	// require model
 	var loginModel = require('models/sysacc/login');
 
+	// require common view
+	var AlertView = require('views/common/alert');
+
 	// require template
 	var tpl = require('text!tpl/login.html');
 	var template = _.template(tpl);
@@ -20,8 +23,10 @@ define(function(require) {
 	return Backbone.View.extend({
 		model : loginModel,
 		initialize : function() {
-			// this.listenTo(this.model, 'change', this.success)
-			// avoid 'change' event, because model.set method trigger 'change' event.
+			// avoid 'change' event, because model.set method trigger 'change'
+			// event. If this use and 'change' event don't need, use
+			// {silent:true} option.
+			// this.listenTo(this.model, 'change', this.success);
 		},
 		render : function() {
 			this.$el.html(template());
@@ -37,22 +42,51 @@ define(function(require) {
 			loginModel.set({
 				username : $('#userid').val(),
 				password : $('#password').val()
+			}, {
+				// Silent option is do everything as normal, but just don't
+				// trigger the event.
+				silent : true
 			});
 
+			// fetch here.
+			// When model does not change, 'change' event is not trigger and
+			// does not run success function.
+			/**
+			 * <pre>
+			 * loginModel.fetch({
+			 * 	method : &quot;POST&quot;,
+			 * 	contentType : 'application/json',
+			 * 	data : JSON.stringify(loginModel.attributes),
+			 * 	error : function(model, response) {
+			 * 		console.log('fetch error');
+			 * 		console.log(model);
+			 * 		console.log(response);
+			 * 	}
+			 * });
+			 * </pre>
+			 */
+
+			// fetch in model. use listenTo().
+			// When model does not change, 'change' event is not trigger and
+			// does not run success function.
+			// loginModel.obtainCertification();
+
+			// fetch in model. not use listenTo
+			// When model does not change, run success function.
 			loginModel.obtainCertification({
 				success : this.success
 			});
 		},
 		success : function() {
-			console.log('function success in singin.js');
 			console.log(loginModel.toJSON());
 			if (loginModel.get('successLogin') == 'Y') {
 				location.hash = '#employeeList';
 			} else {
-//				$('.alert').alert();
-				$('.alert').css('style', 'display:block;').toggleClass('alert-' + loginModel.get('returnType').toLowerCase() , loginModel.get('returnType'));
-				$('#returnType').text(loginModel.get('returnType') + "!");
-				$('#message').text(loginModel.get('errorMessage'));
+				console.log('alert');
+				AlertView.msg($('#alert'), {
+					alert : loginModel.get('returnType'),
+					message : loginModel.get('errorMessage')
+				});
 			}
 		}
 	});
