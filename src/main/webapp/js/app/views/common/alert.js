@@ -17,14 +17,20 @@ define(function(require) {
 	var AlertView = Backbone.View.extend({
 		alerts : [ 'success', 'error', 'warning', 'info' ],
 		template : _.template(tpl),
+
+		/**
+		 * @param {String}
+		 *            [options.alert] alert. Default: none
+		 * @param {String}
+		 *            [options.message] message. Default: none
+		 */
 		initialize : function(options) {
 			var message = options.message || '';
-			var alert = options.hasOwnProperty('alert') ? options.alert
-					: 'info';
+			var alert = options.hasOwnProperty('alert') ? options.alert : 'info';
 
 			if (_.indexOf(this.alerts, alert) === -1) {
-				throw new Error('Invalid alert: [' + alert
-						+ '] Must be one of: ' + this.alerts.join(', '));
+				throw new Error('Invalid alert: [' + alert + '] Must be one of: '
+						+ this.alerts.join(', '));
 			}
 
 			this.alert = alert;
