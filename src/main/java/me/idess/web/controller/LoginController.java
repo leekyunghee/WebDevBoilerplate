@@ -54,12 +54,12 @@ public class LoginController {
 		if (result.hasErrors()) {
 			dto.setSuccessLogin("N");
 			String code = result.getAllErrors().get(0).getCode();
-			dto.setReturnType(CommonBean.ReturnType.Warning);
+			dto.setReturnType(CommonBean.ReturnType.warning);
 			dto.setErrorCode(code);
 			dto.setErrorMessage(messageSource.getMessage(code, null,
 					LocaleContextHolder.getLocale()));
 		} else {
-			dto.setReturnType(CommonBean.ReturnType.Success);
+			dto.setReturnType(CommonBean.ReturnType.success);
 			dto.setSuccessLogin("Y");
 			dto.setToken(TokenObject.makeToken(dto.getUsername()));
 			

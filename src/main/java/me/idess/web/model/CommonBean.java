@@ -2,7 +2,7 @@ package me.idess.web.model;
 
 public abstract class CommonBean {
 	public enum ReturnType {
-		Success, Warning, Error
+		success, warning, error
 	};
 	
 	ReturnType	returnType;
