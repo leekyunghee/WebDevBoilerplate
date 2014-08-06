@@ -7,7 +7,8 @@ require.config({
 		views : '../app/views',
 		models : '../app/models',
 		tpl : '../tpl',
-		nls : '../nls'
+		nls : '../nls',
+		bootstrap : '../../bootstrap/js/bootstrap'
 	},
 
 	// Set the config for the i18n
@@ -26,6 +27,10 @@ require.config({
 		},
 		'underscore' : {
 			exports : '_'
+		},
+		'bootstrap' : {
+			deps : [ 'jquery' ],
+			exports : 'bootstrap'
 		}
 	}
 });
