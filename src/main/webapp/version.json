@@ -5,7 +5,7 @@
     "homepage": "https://idess.tistory.com/",
     "author": "idess <m.idess@gmail.com> (https://github.com/idess/)",
     "dependencies": {
-        "html5": "3.7.0",
+        "html5": "3.7.2",
         "Bootstrap": "3.2.0",
         "jQuery": "1.11.1",
         "RequireJS": "2.1.14",
