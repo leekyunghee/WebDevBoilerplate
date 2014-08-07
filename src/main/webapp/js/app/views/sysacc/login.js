@@ -11,8 +11,8 @@ define(function(require) {
 	var loginModel = require('models/sysacc/login');
 
 	// require common view
-//	var AlertView = require('views/common/alert');
-//	var ModalView = require('views/common/modal');
+	// var AlertView = require('views/common/alert');
+	// var ModalView = require('views/common/modal');
 
 	// require template
 	var tpl = require('text!tpl/login.html');
@@ -28,6 +28,7 @@ define(function(require) {
 			// event. If this use and 'change' event don't need, use
 			// {silent:true} option.
 			// this.listenTo(this.model, 'change', this.success);
+			this.listenTo(this.model, 'invalid', this.error);
 		},
 		render : function() {
 			this.$el.html(template());
@@ -46,7 +47,10 @@ define(function(require) {
 			}, {
 				// Silent option is do everything as normal, but just don't
 				// trigger the event.
-				silent : true
+				// silent : true,
+
+				// Check validate
+				validate : true
 			});
 
 			// fetch here.
@@ -71,12 +75,13 @@ define(function(require) {
 			// When model does not change, 'change' event is not trigger and
 			// does not run success function.
 			// loginModel.obtainCertification();
-
 			// fetch in model. not use listenTo
 			// When model does not change, run success function.
-			loginModel.obtainCertification({
-				success : this.success
-			});
+			if (!loginModel.isValid()) {
+				loginModel.obtainCertification({
+					success : this.success
+				});
+			}
 		},
 		success : function() {
 			console.log(loginModel.toJSON());
@@ -92,6 +97,9 @@ define(function(require) {
 					body : loginModel.get('errorMessage')
 				});
 			}
+		},
+		error : function() {
+			console.log("error");
 		}
 	});
 });

@@ -2,7 +2,11 @@ define(function(require) {
 
 	"use strict";
 
+	// require library
 	var $ = require('jquery'), Backbone = require('backbone');
+
+	// require i18n
+	var locale = require('i18n!nls/str');
 
 	var SignInModel = Backbone.Model.extend({
 		defaults : {
@@ -11,6 +15,20 @@ define(function(require) {
 			"successLogin" : ""
 		},
 		url : "api/login",
+		validate : function(attrs, options) {
+			if (!attrs.username) {
+				Backbone.AlertView.msg($('#alert'), {
+					alert : "warning",
+					message : locale.requireUsername
+				});
+			}
+			if (!attrs.password) {
+				Backbone.AlertView.msg($('#alert'), {
+					alert : "warning",
+					message : locale.requirePassword
+				});
+			}
+		},
 		obtainCertification : function(options) {
 			this.fetch({
 				method : "POST",
