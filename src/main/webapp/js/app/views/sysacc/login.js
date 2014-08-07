@@ -28,7 +28,6 @@ define(function(require) {
 			// event. If this use and 'change' event don't need, use
 			// {silent:true} option.
 			// this.listenTo(this.model, 'change', this.success);
-			this.listenTo(this.model, 'invalid', this.error);
 		},
 		render : function() {
 			this.$el.html(template());
@@ -47,10 +46,10 @@ define(function(require) {
 			}, {
 				// Silent option is do everything as normal, but just don't
 				// trigger the event.
-				// silent : true,
+				silent : true
 
-				// Check validate
-				validate : true
+			// Check validate
+			// validate : true
 			});
 
 			// fetch here.
@@ -77,9 +76,14 @@ define(function(require) {
 			// loginModel.obtainCertification();
 			// fetch in model. not use listenTo
 			// When model does not change, run success function.
-			if (!loginModel.isValid()) {
+			if (loginModel.isValid()) {
 				loginModel.obtainCertification({
 					success : this.success
+				});
+			} else {
+				Backbone.AlertView.msg($('#alert'), {
+					alert : "warning",
+					message : loginModel.validationError
 				});
 			}
 		},

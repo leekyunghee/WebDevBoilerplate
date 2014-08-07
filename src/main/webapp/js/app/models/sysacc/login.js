@@ -17,16 +17,10 @@ define(function(require) {
 		url : "api/login",
 		validate : function(attrs, options) {
 			if (!attrs.username) {
-				Backbone.AlertView.msg($('#alert'), {
-					alert : "warning",
-					message : locale.requireUsername
-				});
+				return locale.requireUsername;
 			}
 			if (!attrs.password) {
-				Backbone.AlertView.msg($('#alert'), {
-					alert : "warning",
-					message : locale.requirePassword
-				});
+				return locale.requirePassword;
 			}
 		},
 		obtainCertification : function(options) {
