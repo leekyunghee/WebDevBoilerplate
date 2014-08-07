@@ -10,23 +10,27 @@ define(function(require) {
 
 	// require template
 	var tpl = require('text!tpl/common/modal.html');
-	
+
+	// require i18n
+	var locale = require('i18n!nls/str');
+
 	var ModalView = Backbone.View.extend({
 		className : "modal backbone-modal",
 		template : _.template(tpl),
-		buttonTemplate : _.template('<button type="button" class="btn <%=className%>"><%=label%></button>'),
+		buttonTemplate : _
+				.template('<button type="button" class="btn <%=className%>"><%=label%></button>'),
 		buttonDefaults : {
 			className : "",
 			label : "",
 			close : false
 		},
 		defaults : {
-			title : "<h3>Info</h3>",
+			title : "Info",
 			backdrop : true,
 			body : "",
 			buttons : [ {
 				className : "btn-primary",
-				label : "Close",
+				label : locale.close,
 				close : true
 			} ]
 		},
@@ -84,5 +88,44 @@ define(function(require) {
 			}, 25);
 		}
 	});
+
+	ModalView.msg = function(options) {
+		var modal = new Backbone.ModalView({
+			title : options.title,
+			body : options.body
+		}).render();
+		return modal;
+	};
+
+	ModalView.msgWithOkBtn = function(options) {
+		var modal = new Backbone.ModalView({
+			title : options.title,
+			body : options.body,
+			buttons : [ {
+				className : "btn-info",
+				label : locale.ok,
+				close : true
+			} ]
+		}).render();
+		return modal;
+	};
+
+	ModalView.msgWithOkCancelBtn = function(options) {
+		var modal = new Backbone.ModalView({
+			title : options.title,
+			body : options.body,
+			buttons : [ {
+				className : "btn-info",
+				label : locale.ok,
+				close : true
+			}, {
+				className : "btn-default",
+				label : locale.cancel,
+				close : true
+			} ]
+		}).render();
+		return modal;
+	};
+
 	return ModalView;
 });

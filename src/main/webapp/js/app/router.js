@@ -4,6 +4,12 @@ define(function(require) {
 
 	// require library
 	var $ = require('jquery'), Backbone = require('backbone');
+	
+	// require modal.js
+	Backbone.ModalView = require('views/common/modal');
+	
+	// require alert.js
+	Backbone.AlertView = require('views/common/alert');
 
 	var $body = $('body');
 
