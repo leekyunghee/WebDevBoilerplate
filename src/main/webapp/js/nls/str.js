@@ -6,7 +6,9 @@ define({
 		"sign_in" : "로그인",
 		"close" : "닫기",
 		"cancel" : "취소",
-		"ok" : "확인"
+		"ok" : "확인",
+		"requireUsername" : "아이디를 넣어주십시오.",
+		"requirePassword" : "비밀번호를 넣어주십시오."
 	},
 	"en-us" : true
 });

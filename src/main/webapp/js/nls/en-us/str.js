@@ -4,5 +4,7 @@ define({
 	"sign_in" : "Sign In",
 	"close" : "Close",
 	"cancel" : "Cancel",
-	"ok" : "OK"
+	"ok" : "OK",
+	"requireUsername" : "ID is mandatory.",
+	"requirePassword" : "Password is mandatory."
 });
