@@ -27,6 +27,8 @@
 
 	<!-- scan validator -->
 	<context:component-scan base-package="me.idess.web.model.validation" />
+	<!-- scan service -->
+	<context:component-scan base-package="me.idess.web.services" />
 	<!-- scan controller -->
 	<context:component-scan base-package="me.idess.web.controller" />
 	
