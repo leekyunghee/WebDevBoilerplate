@@ -2,13 +2,9 @@ package me.idess.web.controller;
 
 import javax.servlet.http.HttpSession;
 
-import me.idess.web.filter.SessionObject;
-import me.idess.web.filter.TokenObject;
-import me.idess.web.mapper.AccountMapper;
 import me.idess.web.model.CommonBean;
 import me.idess.web.model.dto.LoginFormDto;
 import me.idess.web.model.validation.LoginFormDtoValidator;
-import me.idess.web.model.vo.AccountVO;
 import me.idess.web.services.AuthenticationService;
 
 import org.slf4j.Logger;
