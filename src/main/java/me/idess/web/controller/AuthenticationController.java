@@ -2,7 +2,9 @@ package me.idess.web.controller;
 
 import javax.servlet.http.HttpSession;
 
+import me.idess.web.exception.BusinessException;
 import me.idess.web.model.CommonBean;
+import me.idess.web.model.CommonBean.ReturnType;
 import me.idess.web.model.dto.LoginFormDto;
 import me.idess.web.model.validation.LoginFormDtoValidator;
 import me.idess.web.services.AuthenticationService;
@@ -42,35 +44,45 @@ public class AuthenticationController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public LoginFormDto login(@RequestBody LoginFormDto dto, BindingResult result,
-			HttpSession session) {
+	public CommonBean login(@RequestBody LoginFormDto dto, BindingResult result, HttpSession session) {
 		
-		logger.debug("Welcome {}! The client locale is {}.", session.getAttribute("Username"),
-				LocaleContextHolder.getLocale());
-		
-		loginFormDtoValidator.validate(dto, result);
-		
-		logger.debug("result: " + result);
-		
-		if (result.hasErrors()) {
-			dto.setSuccessLogin("N");
-			String code = result.getAllErrors().get(0).getCode();
-			dto.setReturnType(CommonBean.ReturnType.warning);
-			dto.setErrorCode(code);
-			dto.setErrorMessage(messageSource.getMessage(code, null,
-					LocaleContextHolder.getLocale()));
-		} else {
-			authenticationService.login(dto, session);
-			if (dto.getReturnType() == CommonBean.ReturnType.success) {
-				dto.setErrorMessage("");
-			} else {
-				dto.setErrorMessage(messageSource.getMessage(dto.getErrorCode(), null,
-						LocaleContextHolder.getLocale()));
-			}
+		try {
+			logger.debug("Welcome {}! The client locale is {}.", session.getAttribute("Username"),
+					LocaleContextHolder.getLocale());
 			
-			logger.debug("call login in LoginController:" + dto);
+			loginFormDtoValidator.validate(dto, result);
+			
+			logger.debug("result: " + result);
+			
+			if (result.hasErrors()) {
+				dto.setSuccessLogin("N");
+				String code = result.getAllErrors().get(0).getCode();
+				dto.setReturnType(ReturnType.warning);
+				dto.setErrorCode(code);
+				dto.setErrorMessage(messageSource.getMessage(code, null,
+						LocaleContextHolder.getLocale()));
+			} else {
+				authenticationService.login(dto, session);
+				if (dto.getReturnType() == ReturnType.success) {
+					dto.setErrorMessage("");
+				} else {
+					dto.setErrorMessage(messageSource.getMessage(dto.getErrorCode(), null,
+							LocaleContextHolder.getLocale()));
+				}
+				
+				logger.debug("call login in LoginController:" + dto);
+			}
+			return dto;
+		} catch (BusinessException e) {
+			// Service등에서 알 수 있는 메시지 발생
+			CommonBean returnErrorResult = e.returnErrorResult(messageSource);
+			return returnErrorResult;
+		} catch (Exception e) {
+			// 알수 없는 에러 발생
+			BusinessException exception = new BusinessException("errorCode", null,
+					e.getLocalizedMessage(), e);
+			return exception.returnErrorResult(messageSource);
 		}
-		return dto;
 		
 	}
 	
