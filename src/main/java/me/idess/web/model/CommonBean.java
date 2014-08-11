@@ -1,6 +1,6 @@
 package me.idess.web.model;
 
-public abstract class CommonBean {
+public class CommonBean {
 	public enum ReturnType {
 		success, warning, error
 	};
