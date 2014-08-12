@@ -3,7 +3,7 @@ package me.idess.web.services;
 import javax.servlet.http.HttpSession;
 
 import me.idess.web.controller.AuthenticationController;
-import me.idess.web.exception.BaseException;
+import me.idess.web.exception.BusinessException;
 import me.idess.web.filter.SessionObject;
 import me.idess.web.filter.TokenObject;
 import me.idess.web.mapper.AccountMapper;
@@ -14,7 +14,6 @@ import me.idess.web.model.vo.AccountVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,11 +22,9 @@ public class AuthenticationService {
 	private static final Logger	logger	= LoggerFactory.getLogger(AuthenticationController.class);
 	
 	@Autowired
-	MessageSource				messageSource;
-	@Autowired
 	AccountMapper				accountMapper;
 	
-	public void login(LoginFormDto dto, HttpSession session) throws BaseException {
+	public void login(LoginFormDto dto, HttpSession session) throws BusinessException {
 		try {
 			AccountVO accountVO = accountMapper.selectAccountByUsername(dto.getUsername());
 			if (accountVO != null && accountVO.getPassword().equals(dto.getPassword())) {
@@ -49,7 +46,8 @@ public class AuthenticationService {
 				dto.setErrorCode("username.password.invalid");
 			}
 		} catch (Exception e) {
-			throw new BaseException(messageSource, "errorCode", null, null, e);
+			logger.error("errorCode");
+			throw new BusinessException("errorCode", null, null, e);
 		}
 	}
 	

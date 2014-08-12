@@ -4,10 +4,10 @@ define(function(require) {
 
 	// require library
 	var $ = require('jquery'), Backbone = require('backbone');
-
+	
 	// require modal.js
 	Backbone.ModalView = require('views/common/modal');
-
+	
 	// require alert.js
 	Backbone.AlertView = require('views/common/alert');
 
@@ -35,8 +35,7 @@ define(function(require) {
 			"login" : "login",
 			"home" : "home",
 			"employeeList" : "employeeList",
-			"employees/:id" : "employeeDetails",
-			"system/:page/:id" : "system"
+			"employees/:id" : "employeeDetails"
 		},
 		login : function() {
 			var LoginView = require('views/sysacc/login');
@@ -89,13 +88,6 @@ define(function(require) {
 					}).render();
 				}
 			});
-		},
-		system : function(page, id) {
-			var Model = require('models/system/' + page);
-			var View = require('views/system/' + page);
-			
-			var model = new Model({id: id});
-			var view = new View({model : model}).render();
 		}
 
 	});

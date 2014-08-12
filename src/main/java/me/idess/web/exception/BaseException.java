@@ -1,11 +1,7 @@
 package me.idess.web.exception;
 
 import java.text.MessageFormat;
-import java.util.List;
 import java.util.Locale;
-
-import me.idess.web.model.CommonBean;
-import me.idess.web.model.CommonBean.ReturnType;
 
 import org.springframework.context.MessageSource;
 
@@ -91,6 +87,11 @@ public class BaseException extends Exception {
 	}
 	
 	public BaseException(MessageSource messageSource, String messageKey,
+			Object[] messageParameters, Locale locale, Throwable wrappedException) {
+		this(messageSource, messageKey, messageParameters, null, locale, wrappedException);
+	}
+	
+	public BaseException(MessageSource messageSource, String messageKey,
 			Object[] messageParameters, Throwable wrappedException) {
 		this(messageSource, messageKey, messageParameters, null, Locale.getDefault(),
 				wrappedException);
@@ -112,20 +113,4 @@ public class BaseException extends Exception {
 		this.message = messageSource.getMessage(messageKey, messageParameters, defaultMessage,
 				locale);
 	}
-	
-	public CommonBean getErrorBean(CommonBean bean) {
-		bean.setReturnType(ReturnType.error);
-		bean.setErrorCode(messageKey);
-		bean.setErrorMessage(message);
-		return bean;
-	}
-	
-	public List<CommonBean> getErrorBean(List<CommonBean> beans) {
-		CommonBean bean = beans.get(0);
-		bean.setReturnType(ReturnType.error);
-		bean.setErrorCode(messageKey);
-		bean.setErrorMessage(message);
-		return beans;
-	}
-	
 }
