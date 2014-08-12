@@ -2,7 +2,7 @@ package me.idess.web.controller;
 
 import javax.servlet.http.HttpSession;
 
-import me.idess.web.exception.BusinessException;
+import me.idess.web.exception.BaseException;
 import me.idess.web.model.CommonBean;
 import me.idess.web.model.CommonBean.ReturnType;
 import me.idess.web.model.dto.LoginFormDto;
@@ -72,18 +72,18 @@ public class AuthenticationController {
 				
 				logger.debug("call login in LoginController:" + dto);
 			}
-			return dto;
-		} catch (BusinessException e) {
+		} catch (BaseException e) {
 			// Service등에서 알 수 있는 메시지 발생
-			CommonBean returnErrorResult = e.returnErrorResult(messageSource);
-			return returnErrorResult;
+			logger.error(e.getLocalizedMessage(), e);
+			dto = (LoginFormDto) e.getErrorBean(dto);
 		} catch (Exception e) {
 			// 알수 없는 에러 발생
-			BusinessException exception = new BusinessException("errorCode", null,
-					e.getLocalizedMessage(), e);
-			return exception.returnErrorResult(messageSource);
+			logger.error(e.getLocalizedMessage(), e);
+			dto = (LoginFormDto) new BaseException(messageSource, "errorCode", null, null, e)
+					.getErrorBean(dto);
 		}
 		
+		return dto;
 	}
 	
 }
