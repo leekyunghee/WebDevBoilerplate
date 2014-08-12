@@ -35,8 +35,16 @@ require.config({
 	}
 });
 
-require([ 'jquery', 'backbone', 'app/router' ], function($, Backbone, Router) {
+require([ 'jquery', 'underscore', 'backbone', 'app/router', 'views/common/modal',
+		'views/common/alert' ], function($, _, Backbone, Router, ModalView, AlertView) {
+	// create common view
+	Backbone.ModalView = ModalView;
+	Backbone.AlertView = AlertView;
+	
+	// create common util
+
 	console.log('start app');
+
 	var router = new Router();
 	Backbone.history.start();
 });
