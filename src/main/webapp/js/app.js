@@ -1,31 +1,51 @@
 require.config({
 
-    baseUrl: 'js/lib',
+	baseUrl : 'js/lib',
 
-    paths: {
-        app: '../app',
-        tpl: '../tpl'
-    },
+	paths : {
+		app : '../app',
+		views : '../app/views',
+		models : '../app/models',
+		tpl : '../tpl',
+		nls : '../nls',
+		bootstrap : '../../bootstrap/js/bootstrap'
+	},
 
-    map: {
-        '*': {
-            'app/models/employee': 'app/models/memory/employee'
-        }
-    },
+	// Set the config for the i18n
+	// locale : "en-us",
 
-    shim: {
-        'backbone': {
-            deps: ['underscore', 'jquery'],
-            exports: 'Backbone'
-        },
-        'underscore': {
-            exports: '_'
-        }
-    }
+	map : {
+		'*' : {
+			'models/employee' : 'models/memory/employee'
+		}
+	},
+
+	shim : {
+		'backbone' : {
+			deps : [ 'underscore', 'jquery' ],
+			exports : 'Backbone'
+		},
+		'underscore' : {
+			exports : '_'
+		},
+		'bootstrap' : {
+			deps : [ 'jquery' ],
+			exports : 'bootstrap'
+		}
+	}
 });
 
-require(['jquery', 'backbone', 'app/router'], function ($, Backbone, Router) {
+require([ 'jquery', 'underscore', 'backbone', 'app/router', 'views/common/modal',
+		'views/common/alert' ], function($, _, Backbone, Router, ModalView, AlertView) {
+	// create common view
+	Backbone.ModalView = ModalView;
+	Backbone.AlertView = AlertView;
+	
+	// create common util
+//	Backbone.Util = Util;
+
 	console.log('start app');
-    var router = new Router();
-    Backbone.history.start();
+
+	var router = new Router();
+	Backbone.history.start();
 });
