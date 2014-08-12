@@ -42,6 +42,7 @@ require([ 'jquery', 'underscore', 'backbone', 'app/router', 'views/common/modal'
 	Backbone.AlertView = AlertView;
 	
 	// create common util
+//	Backbone.Util = Util;
 
 	console.log('start app');
 
