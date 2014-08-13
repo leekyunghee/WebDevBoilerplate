@@ -79,7 +79,7 @@ public class AuthenticationController {
 		} catch (Exception e) {
 			// 알수 없는 에러 발생
 			logger.error(e.getLocalizedMessage(), e);
-			dto = (LoginFormDto) new BaseException(messageSource, "errorCode", null, null, e)
+			dto = (LoginFormDto) new BaseException(messageSource, "errorCode", null, "", e)
 					.getErrorBean(dto);
 		}
 		
