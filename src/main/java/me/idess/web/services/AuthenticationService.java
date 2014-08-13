@@ -49,7 +49,7 @@ public class AuthenticationService {
 				dto.setErrorCode("username.password.invalid");
 			}
 		} catch (Exception e) {
-			throw new BaseException(messageSource, "errorCode", null, null, e);
+			throw new BaseException(messageSource, "errorCode", null, "", e);
 		}
 	}
 	
