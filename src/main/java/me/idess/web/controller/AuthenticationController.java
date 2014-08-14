@@ -64,6 +64,9 @@ public class AuthenticationController {
 			} else {
 				authenticationService.login(dto, session);
 				if (dto.getReturnType() == ReturnType.success) {
+					// protect password and token.
+					dto.setPassword("");
+					dto.setToken("");
 					dto.setErrorMessage("");
 				} else {
 					dto.setErrorMessage(messageSource.getMessage(dto.getErrorCode(), null,
