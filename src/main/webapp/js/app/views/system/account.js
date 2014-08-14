@@ -2,25 +2,16 @@ define(function(require) {
 
 	"use strict";
 
-	var $ = require('jquery'), 
-		_ = require('underscore'), 
-		Backbone = require('backbone'), 
-		AccountListItemView = require('views/system/accountListItem');
+	var $ = require('jquery'), _ = require('underscore'), Backbone = require('backbone');
+	// AccountListItemView = require('views/system/accountListItem');
 
 	return Backbone.View.extend({
 
 		initialize : function() {
-			this.collection.on("reset", this.render, this);
-			this.collection.on("add", this.render, this);
+			console.log('account.js');
 		},
 
 		render : function() {
-			this.$el.empty();
-			_.each(this.collection.models, function(employee) {
-				this.$el.append(new AccountListItemView({
-					model : employee
-				}).render().el);
-			}, this);
 			return this;
 		}
 	});

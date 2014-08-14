@@ -38,12 +38,14 @@ define(function(require) {
 		},
 		system : function(page1, page2) {
 			baseView.render();
-			var View = require('views/system/' + page1 + "/" + page2);
-			if (id === null) {
+			if (page2 === null) {
+				var View = require('views/system/' + page1);
+				console.log(View);
 				var view = new View({
 					el : $main
 				}).render();
 			} else {
+				var View = require('views/system/' + page1 + "/" + page2);
 				var view = new View({
 					el : $main,
 					key : id
