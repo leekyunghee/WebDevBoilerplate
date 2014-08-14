@@ -8,7 +8,8 @@ define(function(require) {
 	var Backbone = require('backbone');
 
 	// require model
-	var loginModel = require('models/sysacc/login');
+	var LoginModel = require('models/login');
+	var loginModel = new LoginModel();
 
 	// require common view
 	// var AlertView = require('views/common/alert');
@@ -23,7 +24,7 @@ define(function(require) {
 
 	return Backbone.View.extend({
 		model : loginModel,
-		initialize : function() {
+		initialize : function(options) {
 			// avoid 'change' event, because model.set method trigger 'change'
 			// event. If this use and 'change' event don't need, use
 			// {silent:true} option.
