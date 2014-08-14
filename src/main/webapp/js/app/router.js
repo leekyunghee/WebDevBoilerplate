@@ -30,10 +30,10 @@ define(function(require) {
 			"home" : "home",
 			"employeeList" : "employeeList",
 			"employees/:id" : "employeeDetails",
-			"system/:page/:id" : "system"
+			"system/:page(/:id)" : "system"
 		},
 		login : function() {
-			var LoginView = require('views/sysacc/login');
+			var LoginView = require('views/login');
 			var loginView = new LoginView({
 				el : $body
 			}).render();
@@ -85,11 +85,18 @@ define(function(require) {
 			});
 		},
 		system : function(page, id) {
-			var Model = require('models/system/' + page);
 			var View = require('views/system/' + page);
-			
-			var model = new Model();
-			var view = new View({model : model}).render();
+			if (id === null) {
+				var view = new View({
+					el : $body
+				}).render();
+			} else {
+				var view = new View({
+					el : $body,
+					key : id
+				}).render();
+			}
+
 		}
 
 	});
