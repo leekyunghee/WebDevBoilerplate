@@ -16,7 +16,7 @@
 	</resultMap>
 	
 	<select id="selectAccountByUsername" parameterType="string" resultType="AccountVO">
-		SELECT seq, username, password FROM TB_ACCT WHERE userid = #{string}
+		SELECT seq, username, password FROM TB_ACCT WHERE username = #{string}
 	</select>
 	
 	<select id="selectAccounts" resultMap="accountResultMap">
