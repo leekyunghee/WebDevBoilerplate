@@ -27,7 +27,6 @@ define(function(require) {
 		routes : {
 			"" : "login",
 			"login" : "login",
-			"home" : "home",
 			"employeeList" : "employeeList",
 			"employees/:id" : "employeeDetails",
 			"system/:page(/:id)" : "system"
@@ -36,14 +35,6 @@ define(function(require) {
 			var LoginView = require('views/login');
 			var loginView = new LoginView({
 				el : $body
-			}).render();
-		},
-		home : function() {
-			shellView.render();
-			var $content = $('#content', shellView.el);
-			var HomeView = require('views/home');
-			var homeView = new HomeView({
-				el : $content
 			}).render();
 		},
 		employeeList : function() {
