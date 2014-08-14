@@ -4,22 +4,18 @@ define(function(require) {
 
 	// require library
 	var $ = require('jquery'), Backbone = require('backbone');
+	
+	// require view
+	var BaseView = require('views/base')
 
-	var $body = $('body');
-
-	// require common view
-	var ShellView = require('views/shell'), shellView = new ShellView({
+	// require selector
+	var $body = $('body'), baseView = new BaseView({
 		el : $body
-	});
+	}), $main = $('#main', baseView.el);
 
 	// Close the search dropdown on click anywhere in the UI
 	$body.click(function() {
 		$('.dropdown').removeClass("open");
-	});
-
-	$("body").on("click", "#showMeBtn", function(event) {
-		event.preventDefault();
-		shellView.search();
 	});
 
 	return Backbone.Router.extend({
@@ -27,9 +23,8 @@ define(function(require) {
 		routes : {
 			"" : "login",
 			"login" : "login",
-			"employeeList" : "employeeList",
-			"employees/:id" : "employeeDetails",
-			"system/:page(/:id)" : "system"
+			"dashboard" : "dashboard",
+			"system/:page1(/:page2)" : "system"
 		},
 		login : function() {
 			var LoginView = require('views/login');
@@ -37,57 +32,24 @@ define(function(require) {
 				el : $body
 			}).render();
 		},
-		employeeList : function() {
-			shellView.render();
-			var $content = $('#content', shellView.el);
-
-			var models = require('models/employee');
-			var EmployeeListView = require('views/system/employeeList');
-
-			var employee = new models.EmployeeCollection();
-			employee.fetch({
-				success : function(data) {
-					var listView = new EmployeeListView({
-						collection : employee,
-						el : $content
-					}).render();
-				}
-			});
+		dashboard : function() {
+			baseView.render();
+			baseView.selectMenuItem();
 		},
-		employeeDetails : function(id) {
-			shellView.render();
-			var $content = $('#content', shellView.el);
-
-			console.log(id);
-			var models = require('models/employee');
-			var EmployeeView = require('views/system/employee');
-
-			var employee = new models.Employee({
-				id : id
-			});
-
-			employee.fetch({
-				success : function(data) {
-					var employeeView = new EmployeeView({
-						model : data,
-						el : $content
-					}).render();
-				}
-			});
-		},
-		system : function(page, id) {
-			var View = require('views/system/' + page);
+		system : function(page1, page2) {
+			baseView.render();
+			var View = require('views/system/' + page1 + "/" + page2);
 			if (id === null) {
 				var view = new View({
-					el : $body
+					el : $main
 				}).render();
 			} else {
 				var view = new View({
-					el : $body,
+					el : $main,
 					key : id
 				}).render();
 			}
-
+			baseView.selectMenuItem(page);
 		}
 
 	});

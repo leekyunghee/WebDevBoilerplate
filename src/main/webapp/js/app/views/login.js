@@ -11,10 +11,6 @@ define(function(require) {
 	var LoginModel = require('models/login');
 	var loginModel = new LoginModel();
 
-	// require common view
-	// var AlertView = require('views/common/alert');
-	// var ModalView = require('views/common/modal');
-
 	// require template
 	var tpl = require('text!tpl/login.html');
 	var template = _.template(tpl);
@@ -91,7 +87,7 @@ define(function(require) {
 		success : function() {
 			console.log(loginModel.toJSON());
 			if (loginModel.get('successLogin') == 'Y') {
-				location.hash = '#employeeList';
+				location.hash = '#dashboard';
 			} else {
 				Backbone.AlertView.msg($('#alert'), {
 					alert : loginModel.get('returnType'),
