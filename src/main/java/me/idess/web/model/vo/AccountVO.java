@@ -10,6 +10,7 @@ public class AccountVO extends CommonBean implements Serializable {
 	private int					seq;
 	private String				username;
 	private String				password;
+	private String				role;
 	private String				enabled;
 	private String				mail;
 	private String				sms;
@@ -38,6 +39,14 @@ public class AccountVO extends CommonBean implements Serializable {
 		this.password = password;
 	}
 	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	public String getEnabled() {
 		return enabled;
 	}
@@ -62,14 +71,11 @@ public class AccountVO extends CommonBean implements Serializable {
 		this.sms = sms;
 	}
 	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	@Override
 	public String toString() {
 		return "AccountVO [seq=" + seq + ", username=" + username + ", password=" + password
-				+ ", enabled=" + enabled + ", mail=" + mail + ", sms=" + sms + "]";
+				+ ", role=" + role + ", enabled=" + enabled + ", mail=" + mail + ", sms=" + sms
+				+ "]";
 	}
 	
 }

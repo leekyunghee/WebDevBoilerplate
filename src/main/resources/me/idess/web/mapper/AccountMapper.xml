@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="selectAccounts" resultMap="accountResultMap">
-		SELECT seq, username, password, enabled, mail, sms FROM TB_ACCT
+		SELECT seq, username, password, role, enabled, mail, sms FROM TB_ACCT
 	</select>
 
 </mapper>

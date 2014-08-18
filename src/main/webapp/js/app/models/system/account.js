@@ -10,11 +10,15 @@ define(function(require) {
 
 	var SignInModel = Backbone.Model.extend({
 		defaults : {
+			"seq" : "",
 			"username" : "",
 			"password" : "",
-			"successLogin" : ""
+			"role" : "",
+			"enabled" : "",
+			"mail" : "",
+			"sms" : ""
 		},
-		url : "api/login",
+		url : "api/account/selectAccounts",
 		validate : function(attrs, options) {
 			if (!attrs.username) {
 				return locale.requireUsername;
@@ -22,19 +26,9 @@ define(function(require) {
 			if (!attrs.password) {
 				return locale.requirePassword;
 			}
-		},
-		obtainCertification : function(options) {
-			this.fetch({
-				method : "POST",
-				contentType : 'application/json',
-				data : JSON.stringify(this.toJSON()),
-				success : options.success,
-				error : function(model, response) {
-					console.log('fetch error');
-					console.log(model);
-					console.log(response);
-				}
-			});
+			if (!attrs.role) {
+				return locale.requireRole;
+			}
 		}
 	});
 
