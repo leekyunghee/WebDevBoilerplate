@@ -8,7 +8,7 @@ define(function(require) {
 	return Backbone.View.extend({
 
 		initialize : function() {
-			console.log('account.js');
+			console.log('account/list.js');
 		},
 
 		render : function() {
