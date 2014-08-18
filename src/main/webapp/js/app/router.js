@@ -38,19 +38,20 @@ define(function(require) {
 			baseView.selectMenuItem();
 		},
 		system : function(page1, page2) {
+			this.pageView('system', page1, page2);
+		},
+		pageView : function(category, page1, page2) {
 			baseView.render();
 			if (page2 === null) {
-				var viewModuleName = 'views/system/' + page1;
+				var viewModuleName = 'views/' + category + '/' + page1;
 				require([ viewModuleName ], function(View) {
-					console.log(View);
 					var view = new View({
 						el : $main
 					}).render();
 				});
 			} else {
-				var viewModuleName = 'views/system/' + page1 + "/" + page2;
+				var viewModuleName = 'views/' + category + '/' + page1 + "/" + page2;
 				require([ viewModuleName ], function(View) {
-					console.log(View);
 					var view = new View({
 						el : $main
 					}).render();
