@@ -4,10 +4,31 @@ define(function(require) {
 
 	// require library
 	var $ = require('jquery'), Backbone = require('backbone');
+
+	// require view
+	var FrameView = require('views/frame'),
+		frameView = new FrameView({
+			el : $('body')
+		}).render(),
+		$container = $('#container', frameView.el);
+
+	var BaseRouter = require('routers/baseRouter'),
+		baseRouter = new BaseRouter();
+	baseRouter.setOptions({
+		$container : $container
+	});
 	
-	// require routers
-	var DefaultRouter = require('routers/defaultRouter'), AccountRouter = require('routers/accountRouter');
+	var SystemRouter = require('routers/systemRouter'),
+		systemRouter = new SystemRouter();
+	systemRouter.setOptions({
+		$container : $container,
+		frameView : frameView
+	});
 	
-	var defaultRouter = new DefaultRouter();
-	var accountRouter = new AccountRouter();
+	var PolicyRouter = require('routers/policyRouter'),
+	policyRouter = new PolicyRouter();
+	policyRouter.setOptions({
+		$container : $container,
+		frameView : frameView
+	});
 });
