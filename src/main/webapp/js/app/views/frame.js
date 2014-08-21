@@ -5,8 +5,9 @@ define(function(require) {
 	var $ = require('jquery'),
 		_ = require('underscore'),
 		Backbone = require('backbone'),
-		tpl = require('text!tpl/base.html'),
-		template = _.template(tpl), $menuItems;
+		tpl = require('text!tpl/frame.html'),
+		template = _.template(tpl),
+		$menuItems;
 
 	return Backbone.View.extend({
 
@@ -15,7 +16,7 @@ define(function(require) {
 
 		render : function() {
 			this.$el.html(template());
-			$menuItems = $('.container-fluid .nav li', this.el);
+			$menuItems = $('.nav .navbar-nav', this.el);
 			return this;
 		},
 

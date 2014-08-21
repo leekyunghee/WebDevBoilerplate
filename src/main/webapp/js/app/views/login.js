@@ -27,6 +27,9 @@ define(function(require) {
 			// this.listenTo(this.model, 'change', this.success);
 		},
 		render : function() {
+			this.$el.empty();
+			this.$el.removeClass();
+			
 			this.$el.html(template());
 			$('#userid').prop('placeholder', locale.id);
 			$('#password').prop('placeholder', locale.password);

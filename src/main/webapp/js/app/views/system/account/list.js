@@ -2,7 +2,17 @@ define(function(require) {
 
 	"use strict";
 
-	var $ = require('jquery'), _ = require('underscore'), Backbone = require('backbone');
+	// require library
+	var $ = require('jquery'),
+		_ = require('underscore'),
+		Backbone = require('backbone'),
+		tpl = require('text!tpl/system/account/accountList.html');
+	
+	var template = _.template(tpl);
+	
+	var $list, $detail;
+	
+	// require views
 	// AccountListItemView = require('views/system/accountListItem');
 
 	return Backbone.View.extend({
@@ -12,6 +22,11 @@ define(function(require) {
 		},
 
 		render : function() {
+			this.$el.empty();
+			this.$el.html(template());
+			$list = $('#list', this.el);
+			$detail = $('#detail', this.el);
+			
 			return this;
 		}
 	});

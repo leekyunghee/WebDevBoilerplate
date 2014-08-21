@@ -4,7 +4,12 @@ body {
 }
 
 footer {
+	position: fixed;
+	bottom: 0px;
 	text-align: center;
+	padding: 10px;
+	width: 100%;
+	background-color: #f8f8f8;
 }
 
 .form-signin {
@@ -45,9 +50,29 @@ footer {
 }
 
 /*
+ * Placeholder dashboard ideas
+ */
+.placeholders {
+	margin-top: 11px;
+	background-color: #f8f8f8;
+}
+
+.placeholders h4 {
+	margin-bottom: 0;
+}
+
+.placeholder {
+	margin-bottom: 10px;
+}
+
+.placeholder img {
+	display: inline-block;
+	border-radius: 50%;
+}
+
+/*
  * Sidebar
  */
-
 /* Hide for mobile, show later */
 .sidebar {
 	display: none;
@@ -57,7 +82,7 @@ footer {
 	.sidebar {
 		position: fixed;
 		top: 51px;
-		bottom: 0;
+		bottom: 51px;
 		left: 0;
 		z-index: 1000;
 		display: block;
@@ -79,6 +104,12 @@ footer {
 }
 
 /* Sidebar navigation */
+.btn-sidebar {
+	text-align: center;
+	margin-right: -21px; /* 20px padding + 1px border */
+	margin-left: -20px;
+}
+
 .nav-sidebar {
 	margin-right: -21px; /* 20px padding + 1px border */
 	margin-bottom: 20px;
@@ -94,4 +125,22 @@ footer {
 	{
 	color: #fff;
 	background-color: #3bafda;
+}
+
+/*
+ * Main content
+ */
+.main {
+	padding: 20px;
+}
+
+@media ( min-width : 768px) {
+	.main {
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+}
+
+.main .page-header {
+	margin-top: 0;
 }
