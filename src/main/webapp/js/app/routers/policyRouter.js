@@ -8,7 +8,7 @@ define(function(require) {
 	// require View
 	var LayoutView = require('views/layout'), layoutView, frameView;
 
-	var $container, $list, $content;
+	var $container, $list, $main;
 
 	return Backbone.Router.extend({
 
@@ -21,13 +21,17 @@ define(function(require) {
 			layoutView = new LayoutView({
 				el : $container
 			});
-			$list = $('.list', layoutView.el);
-			$content = $('.content', layoutView.el);
 			
 			frameView = options.frameView;
 		},
 		detection : function(ruleNo) {
 			layoutView.render();
+			$list = $('.sidebar', layoutView.el);
+			$main = $('.main', layoutView.el);
+			
+			$list.append('policy list');
+			$main.append('victim detection policy main');
+			
 			frameView.selectMenuItem('policy');
 		}
 

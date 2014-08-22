@@ -5,6 +5,9 @@ define(function(require) {
 	// require library
 	var $ = require('jquery'), Backbone = require('backbone');
 
+	// require View
+	var frameView;
+	
 	var $container;
 
 	return Backbone.Router.extend({
@@ -17,6 +20,8 @@ define(function(require) {
 		},
 		setOptions : function(options) {
 			$container = options.$container;
+			
+			frameView = options.frameView;
 		},
 		login : function() {
 			$container.empty();
@@ -32,6 +37,8 @@ define(function(require) {
 					el : $container
 				}).render();
 			});
+			
+			frameView.selectMenuItem('');
 		},
 		expire : function() {
 		}

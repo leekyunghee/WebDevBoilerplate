@@ -18,7 +18,7 @@ define(function(require) {
 			"mail" : "",
 			"sms" : ""
 		},
-		url : "api/account/selectAccounts",
+		url : "api/account/selectAccountByUsername",
 		validate : function(attrs, options) {
 			if (!attrs.username) {
 				return locale.requireUsername;
