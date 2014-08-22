@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import me.idess.web.controller.AuthenticationController;
-import me.idess.web.model.dto.LoginFormDto;
 import me.idess.web.model.vo.AccountVO;
 import me.idess.web.services.system.AccountService;
 
@@ -33,10 +32,18 @@ public class AccountController {
 	
 	@RequestMapping(value = "/selectAccounts", method = RequestMethod.POST)
 	@ResponseBody
-	public List<AccountVO> selectAccounts(@RequestBody LoginFormDto dto, BindingResult result,
-			HttpSession session) {
+	public List<AccountVO> selectAccounts(BindingResult result, HttpSession session) {
 		logger.debug("AccountController selectAccounts method");
 		List<AccountVO> accounts = accountService.selectAccounts();
 		return accounts;
+	}
+	
+	@RequestMapping(value = "/selectAccountByUsername", method = RequestMethod.POST)
+	@ResponseBody
+	public AccountVO selectAccountByUsername(@RequestBody AccountVO vo, BindingResult result,
+			HttpSession session) {
+		logger.debug("AccountController selectAccounts method");
+		AccountVO account = accountService.selectAccountByUsername(vo.getUsername());
+		return account;
 	}
 }
