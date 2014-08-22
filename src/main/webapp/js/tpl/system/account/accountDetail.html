@@ -1,24 +1,17 @@
-<div id="details" class="span7">
-	<p>
-		<img src="pics/<%= firstName %>_<%= lastName %>.jpg" width="160" height="160" />
-	</p>
-	<h3><%= firstName %> <%= lastName %></h3>
-	<h4><%= title %></h4>
-	<br>
-	<table class="table table-striped">
-		<% if (managerId) { %>
-		<tr>
-			<td>Manager:</td>
-			<td><i class="icon-user"></i> <a href='#employees/<%= managerId %>'><%= managerName %></a></td>
-		</tr>
-		<% } %>
-		<tr>
-			<td>Cell Phone:</td>
-			<td><i class="icon-headphones"></i> <%= cellPhone %></td>
-		</tr>
-		<tr>
-			<td>Email:</td>
-			<td><i class="icon-envelope"></i> <a href="mailto:<%= email %>"><%= email %></a></td>
-		</tr>
-	</table>
-</div>
+<h3><%= username %></h3>
+<br>
+<table class="table table-hover">
+	<tr>
+		<td>Role:</td>
+		<td><%= role %></td>
+	</tr>
+	<tr>
+		<td>Cell Phone:</td>
+		<td><span class="glyphicon glyphicon-phone"></span> <%= sms %></td>
+	</tr>
+	<tr>
+		<td>Email:</td>
+		<td><span class="glyphicon glyphicon-envelope"></span> <a href="mailto:<%= mail %>"><%=
+				mail %></a></td>
+	</tr>
+</table>
