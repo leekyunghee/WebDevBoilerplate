@@ -35,6 +35,7 @@ define(function(require) {
 					contentType : 'application/json',
 					data : JSON.stringify(accountModel.toJSON()),
 					success : function(model, response, options) {
+						console.log(model);
 						self.$el.html(template(model.attributes));
 					},
 					error : function(model, response) {
@@ -44,7 +45,9 @@ define(function(require) {
 					}
 				});
 
-				options.listView.selectAccountItem(options.username);
+				if (options.listView !== undefined) {
+					options.listView.selectAccountItem(options.username);
+				}
 			}
 
 			return this;
