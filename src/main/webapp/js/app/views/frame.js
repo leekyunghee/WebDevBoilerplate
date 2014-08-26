@@ -16,7 +16,7 @@ define(function(require) {
 
 		render : function() {
 			this.$el.html(template());
-			$menuItems = $('.nav .navbar-nav', this.el);
+			$menuItems = $('.navbar .nav li', this.el);
 			return this;
 		},
 

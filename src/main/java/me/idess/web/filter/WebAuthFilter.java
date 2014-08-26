@@ -1,6 +1,7 @@
 package me.idess.web.filter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -38,7 +39,7 @@ public class WebAuthFilter implements Filter {
 			HttpSession session = httpRequest.getSession();
 			String uri = httpRequest.getRequestURI();
 			
-			// Script files, style files, image files is not  filter.
+			// Script files, style files, image files is not filter.
 			if (uri.contains(".js") || uri.contains(".css") || uri.contains(".gif")
 					|| uri.contains(".png") || uri.contains(".jpg") || uri.contains(".html")) {
 				filterChain.doFilter(httpRequest, httpResponse);
@@ -64,6 +65,14 @@ public class WebAuthFilter implements Filter {
 					filterChain.doFilter(httpRequest, httpResponse);
 				} else {
 					logger.debug("Session is null or abnormal url access");
+					// TODO : 로그인 페이지로 이동하는 로직 만들기
+					String str = "<script>location.href='/sessionExpire.html';</script>";
+					response.setContentType("text/html; charset=UTF-8");
+					response.setCharacterEncoding("utf-8");
+					PrintWriter out = response.getWriter();
+					out.print(str);
+					out.flush();
+					out.close();
 				}
 			} else {
 				logger.debug("Authorized user");

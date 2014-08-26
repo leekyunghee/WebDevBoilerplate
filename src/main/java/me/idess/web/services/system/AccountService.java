@@ -27,4 +27,10 @@ public class AccountService {
 		List<AccountVO> accountVOs = accountMapper.selectAccounts();
 		return accountVOs;
 	}
+	
+	public AccountVO selectAccountByUsername(String username) {
+		logger.debug("AccountService selectAccounts method");
+		AccountVO accountVO = accountMapper.selectAccountByUsername(username);
+		return accountVO;
+	}
 }

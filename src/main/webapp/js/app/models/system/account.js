@@ -8,7 +8,7 @@ define(function(require) {
 	// require i18n
 	var locale = require('i18n!nls/str');
 
-	var SignInModel = Backbone.Model.extend({
+	var AccountModel = Backbone.Model.extend({
 		defaults : {
 			"seq" : "",
 			"username" : "",
@@ -18,7 +18,7 @@ define(function(require) {
 			"mail" : "",
 			"sms" : ""
 		},
-		url : "api/account/selectAccounts",
+		url : "api/account/selectAccountByUsername",
 		validate : function(attrs, options) {
 			if (!attrs.username) {
 				return locale.requireUsername;
@@ -32,6 +32,10 @@ define(function(require) {
 		}
 	});
 
-	return SignInModel;
+	var AccountCollection = Backbone.Collection.extend({
+		model : AccountModel
+	});
+
+	return AccountModel;
 
 });

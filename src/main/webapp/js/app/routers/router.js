@@ -15,7 +15,8 @@ define(function(require) {
 	var BaseRouter = require('routers/baseRouter'),
 		baseRouter = new BaseRouter();
 	baseRouter.setOptions({
-		$container : $container
+		$container : $container,
+		frameView : frameView
 	});
 	
 	var SystemRouter = require('routers/systemRouter'),
