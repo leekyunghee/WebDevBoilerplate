@@ -40,18 +40,7 @@ define(function(require) {
 		},
 		accountDetail : function(username) {
 			if (listView === undefined) {
-				layoutView.render();
-
-				$list = $('.sidebar', layoutView.el);
-				$main = $('.main', layoutView.el);
-				
-				require([ 'views/system/account/list' ], function(ListView) {
-					listView = new ListView({
-						el : $list
-					}).render();
-				});
-
-				frameView.selectMenuItem('system');
+				this.account();
 			}
 			require([ 'views/system/account/detail' ], function(DetailView) {
 				var detailView = new DetailView({
