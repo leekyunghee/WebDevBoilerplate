@@ -30,10 +30,16 @@ define(function(require) {
 			$list = $('.sidebar', layoutView.el);
 			$main = $('.main', layoutView.el);
 
-			require([ 'views/system/account/list' ], function(ListView) {
+			require([ 'views/system/account/list', 'views/system/account/detail' ], function(ListView, DetailView) {
 				listView = new ListView({
 					el : $list
 				}).render();
+				var detailView = new DetailView({
+					el : $main
+				}).render({
+					username : '',
+					listView : listView
+				});
 			});
 
 			frameView.selectMenuItem('system');
