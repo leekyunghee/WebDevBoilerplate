@@ -21,7 +21,7 @@ define(function(require) {
 			var self = this;
 			this.$el.empty();
 
-			if (options.username === '') {
+			if (options.username === null) {
 				this.$el.html('<h1>No selected item.</h1>');
 			} else {
 				accountModel.set({
