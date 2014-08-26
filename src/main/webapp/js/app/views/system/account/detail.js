@@ -17,7 +17,6 @@ define(function(require) {
 	return Backbone.View.extend({
 
 		initialize : function() {
-			console.log('account/list.js');
 		},
 
 		render : function(options) {
@@ -35,7 +34,6 @@ define(function(require) {
 				contentType : 'application/json',
 				data : JSON.stringify(accountModel.toJSON()),
 				success : function(model, response, options) {
-					console.log(model);
 					self.$el.html(template(model.attributes));
 				},
 				error : function(model, response) {

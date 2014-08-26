@@ -32,7 +32,7 @@ public class AccountController {
 	
 	@RequestMapping(value = "/selectAccounts", method = RequestMethod.POST)
 	@ResponseBody
-	public List<AccountVO> selectAccounts(BindingResult result, HttpSession session) {
+	public List<AccountVO> selectAccounts(HttpSession session) {
 		logger.debug("AccountController selectAccounts method");
 		List<AccountVO> accounts = accountService.selectAccounts();
 		return accounts;

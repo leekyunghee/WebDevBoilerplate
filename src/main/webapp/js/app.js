@@ -6,6 +6,7 @@ require.config({
 		app : '../app',
 		views : '../app/views',
 		models : '../app/models',
+		collections : '../app/collections',
 		routers : '../app/routers',
 		tpl : '../tpl',
 		nls : '../nls',
