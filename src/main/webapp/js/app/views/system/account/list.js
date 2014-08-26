@@ -49,7 +49,6 @@ define(function(require) {
 			accountCollection.each(this.addOne);
 		},
 		selectAccountItem : function(username) {
-			console.log(username);
 			var $items = $('#list li', this.el);
 			$items.removeClass('active');
 			if (username) {
