@@ -41,11 +41,14 @@ require([ 'jquery', 'underscore', 'backbone', 'views/common/commonView', 'router
 function(CommonView, Router) {
 	var _sync = Backbone.sync;
 	Backbone.sync = function(method, model, options) {
-		options.error = function(model, response) {
+		options.error = function(model, response, options) {
 			console.log('fetch error');
 			console.log(model);
 			console.log(response);
-			eval(model.responseText);
+			console.log(options);
+			if (options === 'Unauthorized') {
+				eval(model.responseText);
+			}
 		};
 		
 		_sync(method, model, options);
