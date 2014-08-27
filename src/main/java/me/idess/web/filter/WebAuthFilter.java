@@ -65,14 +65,7 @@ public class WebAuthFilter implements Filter {
 					filterChain.doFilter(httpRequest, httpResponse);
 				} else {
 					logger.debug("Session is null or abnormal url access");
-					String str = "location.href='/';";
-					httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					httpResponse.setContentType("text/html; charset=UTF-8");
-					httpResponse.setCharacterEncoding("utf-8");
-					PrintWriter out = response.getWriter();
-					out.print(str);
-					out.flush();
-					out.close();
+					passRequest(response, httpResponse);
 				}
 			} else {
 				logger.debug("Authorized user");
@@ -91,12 +84,26 @@ public class WebAuthFilter implements Filter {
 					
 					if (uri.equals(loginUri)) {
 						filterChain.doFilter(httpRequest, httpResponse);
+					} else {
+						passRequest(response, httpResponse);
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void passRequest(ServletResponse response, HttpServletResponse httpResponse)
+			throws IOException {
+		String str = "location.href='/';";
+		httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+		httpResponse.setContentType("text/html; charset=UTF-8");
+		httpResponse.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(str);
+		out.flush();
+		out.close();
 	}
 	
 	@Override
