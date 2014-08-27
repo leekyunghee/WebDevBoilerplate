@@ -65,7 +65,6 @@ public class WebAuthFilter implements Filter {
 					filterChain.doFilter(httpRequest, httpResponse);
 				} else {
 					logger.debug("Session is null or abnormal url access");
-					// TODO : 로그인 페이지로 이동하는 로직 만들기
 					String str = "location.href='/';";
 					httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 					httpResponse.setContentType("text/html; charset=UTF-8");
