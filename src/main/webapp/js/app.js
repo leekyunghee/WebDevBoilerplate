@@ -18,7 +18,8 @@ require.config({
 
 	map : {
 		'*' : {
-			'models/employee' : 'models/memory/employee'
+			'models/employee' : 'models/memory/employee',
+			'epoch' : 'epoch.min'
 		}
 	},
 
@@ -33,6 +34,13 @@ require.config({
 		'bootstrap' : {
 			deps : [ 'jquery' ],
 			exports : 'bootstrap'
+		},
+		'd3' : {
+			exports : 'd3'
+		},
+		'epoch.min' : {
+			deps : [ 'd3' ],
+			exports : 'Epoch'
 		}
 	}
 });
