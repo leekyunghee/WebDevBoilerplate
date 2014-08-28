@@ -16,7 +16,7 @@ define(function(require) {
 			"" : "login",
 			"login" : "login",
 			"dashboard" : "dashboard",
-			"expire" : "expire"
+			"sessionExpire" : "sessionExpire"
 		},
 		setOptions : function(options) {
 			$container = options.$container;
@@ -40,7 +40,8 @@ define(function(require) {
 			
 			frameView.selectMenuItem('');
 		},
-		expire : function() {
+		sessionExpire : function() {
+			$('body').html('session expired.');
 		}
 
 	});

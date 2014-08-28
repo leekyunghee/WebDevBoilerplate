@@ -25,15 +25,24 @@ define(function(require) {
 
 			frameView = options.frameView;
 		},
-		account : function() {
+		account : function(username) {
 			layoutView.render();
 			$list = $('.sidebar', layoutView.el);
 			$main = $('.main', layoutView.el);
 
-			require([ 'views/system/account/list' ], function(ListView) {
+			require([ 'views/system/account/list', 'views/system/account/detail' ], function(ListView, DetailView) {
 				listView = new ListView({
 					el : $list
 				}).render();
+				
+				if (username !== undefined) {
+					var detailView = new DetailView({
+						el : $main
+					}).render({
+						username : username,
+						listView : listView
+					});
+				}
 			});
 
 			frameView.selectMenuItem('system');

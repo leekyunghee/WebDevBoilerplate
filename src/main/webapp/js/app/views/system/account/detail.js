@@ -21,8 +21,8 @@ define(function(require) {
 			var self = this;
 			this.$el.empty();
 
-			if (options.username === '') {
-				console.log('No selected item.');
+			if (options.username === null) {
+				this.$el.html('<h1>No selected item.</h1>');
 			} else {
 				accountModel.set({
 					username : options.username
@@ -35,13 +35,7 @@ define(function(require) {
 					contentType : 'application/json',
 					data : JSON.stringify(accountModel.toJSON()),
 					success : function(model, response, options) {
-						console.log(model);
 						self.$el.html(template(model.attributes));
-					},
-					error : function(model, response) {
-						console.log('fetch error');
-						console.log(model);
-						console.log(response);
 					}
 				});
 
